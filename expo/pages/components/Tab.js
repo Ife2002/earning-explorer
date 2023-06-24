@@ -1,9 +1,9 @@
 import React,{ useState } from 'react'
 import { useRouter } from 'next/router';
 
-function Tab({ children }) {
+function Tab({ children, setCurrentIndex }) {
     const router = useRouter();
-    const [currentIndex, setCurrentIndex] = useState(0)
+    
     
 
     const Tabs = [
@@ -14,10 +14,10 @@ function Tab({ children }) {
   return (
     <div className='text-black w-[100%]'>
    <div className='flex flex-col justify-evenly'> 
-    <h1 onClick={() => router.push('/Tabs/TabOne')} className='cursor-pointer'>Tab 1</h1>
-    <h1 onClick={() => router.push('/Tabs/TabTwo')} className='cursor-pointer'>Tab 2</h1>
-    <h1 onClick={() => router.push('/Tabs/TabThree')} className='cursor-pointer'>Tab 3</h1>
-        </div>
+    <h1 onClick={() => setCurrentIndex(0)} className='cursor-pointer'>Tab 1</h1>
+    <h1 onClick={() => setCurrentIndex(1)} className='cursor-pointer'>Tab 2</h1>
+    <h1 onClick={() => setCurrentIndex(2)} className='cursor-pointer'>Tab 3</h1>
+    </div>
     
     {Tabs[currentIndex]}
     </div>

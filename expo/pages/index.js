@@ -7,6 +7,7 @@ import Sectors from './components/filters/Sectors';
 import Terms from './components/filters/Terms';
 import Companies from './components/filters/Companies';
 import NumberAnimation from './components/NumberAnimation';
+
 import Head from 'next/head';
 import Card from './components/Card';
 
@@ -14,6 +15,7 @@ import Tab from './components/Tab';
 import dynamic from 'next/dynamic';
 const ApexChart = dynamic(() => import('react-apexcharts'), { ssr: false });
 import axios from 'axios';
+import RangeSlider from './components/Slider';
 
 
 const inter = Inter({ subsets: ['latin'] })
@@ -22,6 +24,7 @@ export default function Home() {
 
   const [isOpen, setIsOpen] = useState(true);
   const [clickCount, setClickCount] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState(0)
   const [filter, setFilter] = useState("Regions");
   const [quarter, setQuarter] = useState(null)
   const [country, setCountry] = useState('All')
@@ -32,7 +35,10 @@ export default function Home() {
   const [terms, setTerms] = useState('All')
   const [list, setList] = useState(null)
   const [tfr, setTfr] = useState(null)
-  const [card, setCard] = useState(null)
+  const [tfo, setTfo] = useState(null)
+  const [card, setCard] = useState(null);
+  const [cardtwo, setCardtwo] = useState(null)
+  const [cardthree, setCardthree] = useState(null)
   const [drop, setDrop] = useState([
     {
       name: "North America"
@@ -70,18 +76,26 @@ export default function Home() {
           const url2 = 'https://data-value-tool.up.railway.app/companies-countries-sectors'
           const url3 = 'https://data-value-tool.up.railway.app/individual-quarterly-terms-count';
           const url4 = 'https://data-value-tool.up.railway.app/terms-frequencies-over-years-quarter';
+          const url5 = 'https://data-value-tool.up.railway.app/terms-frequencies-over-years-quarter';
+          const url6 = 'https://data-value-tool.up.railway.app/total-financials';
+          const url7 = 'https://data-value-tool.up.railway.app/average-financials';
       
           try {
             const response1 = await axios.post(url, payload);
             const response2 = await axios.post(url2, payload);
             const response3 = await axios.post(url3, payload);
             const response4 = await axios.post(url4, payload);
-      
+            const response5 = await axios.post(url5, payload);
+            const response6 = await axios.post(url6, payload);
+            const response7 = await axios.post(url7, payload);
+
             setList(JSON.parse(response1.data))
             setCard(JSON.parse(response2.data))
             setQuarter(JSON.parse(response3.data));
             setTfr(JSON.parse(response4.data))
-      
+            setTfo(JSON.parse(response5.data))
+            setCardtwo(JSON.parse(response6.data))
+            setCardthree(JSON.parse(response7.data))
             setIsLoading(false)
            // console.log(card);
           //console.log(list)
@@ -91,9 +105,9 @@ export default function Home() {
         };
 
         fetchData();
-      }, []);
+      }, [payload]);
 
-console.log("here" + tfr)
+console.log("here" + JSON.stringify(cardthree))
 
   const SectorsHead = ["All sectors"]
   // console.log("find" + JSON.stringify(list))
@@ -113,14 +127,6 @@ console.log("here" + tfr)
   }
 
 
-  // const chartData = {
-  //   labels: ['Country 1', 'Country 2', 'Country 3'], // Replace with your actual country labels
-  //   datasets: [{
-  //     label: 'Population',
-  //     data: [10, 20, 30], // Replace with your actual population data
-  //     backgroundColor: ['rgba(255, 0, 0, 0.5)', 'rgba(0, 255, 0, 0.5)', 'rgba(0, 0, 255, 0.5)'], // Replace with your desired colors
-  //   }],
-  // };
 
   const options = {
     chart: {
@@ -156,11 +162,23 @@ console.log("here" + tfr)
     series: series_data,
   };
 
+  const radial_data = []
+
+  for (let i = 0; i < tfr?.labels.length; i++) {
+    const series_element = {
+      name : tfo?.labels[i],
+      data : tfo?.data[i]
+    }
+
+    radial_data.push(series_element)
+    
+  };
+
   const radialOptions = {
     chart: {
       type: 'radialBar' //qjson.type
     },
-    series: [44, 55, 67, 83],
+    series: radial_data,
     plotOptions: {
       radialBar: {
         dataLabels: {
@@ -181,23 +199,57 @@ console.log("here" + tfr)
         }
       }
     },
-    labels: ['Apples', 'Oranges', 'Bananas', 'Berries'],
+    labels: tfo?.labels,
   };
+
+  const Tabs = [
+    <div className='bg-green-300 h-[10rem] w-[100%]'>
+    <div className='bg-blue-400 mt-4'>
+     <ApexChart options={radialOptions} series={radialOptions.series} type={radialOptions.chart.type} /> 
+     </div>
+
+     <div className='bg-white mt-4'>
+     <ApexChart options={heatmapOptions} series={heatmapOptions.series} type={heatmapOptions.chart.type} /> 
+     </div>
+    </div>,
+    <div className='bg-purple-300 h-[10rem] w-[100%]'>
+      <div className='bg-white mt-4'>
+     <ApexChart options={heatmapOptions} series={heatmapOptions.series} type={heatmapOptions.chart.type} /> 
+     </div>
+     <div className='bg-white mt-4'>
+     <ApexChart options={options} series={options.series} type={options.chart.type} /> 
+     </div>
+    </div>,
+    <div className='bg-red-300 h-[10rem] w-[100%]'>
+      <div className='bg-white mt-4'>
+     <ApexChart options={options} series={options.series} type={options.chart.type} /> 
+     </div>
+    </div>
+]
 
   if (isLoading) {
     return <div>Loading...</div>;
   }
   return (
     <main
-      className={`flex min-h-screen bg-[#051131] flex-col items-center justify-between p-24 ${inter.className}`}
+      className={`flex min-h-screen bg-[#051131] flex-row ${inter.className}`}
     >
     <Head>
         <title>Earning Explore || Data product LLC</title>
      </Head> 
      {/* <Fliter /> */}
+     <div className='bg-white text-white sticky top-0 left-0 h-[100vh] px-2 w-[20%]'>
+      <div className='border-black border-b-2 py-5 mx-3 flex justify-center'>
+      <h1 className='font-bold text-black text-2xl'>Earning Explorer</h1>
+      </div>
+      
+     <button onClick={() => setCurrentIndex(0)} className='w-[100%] py-2 rounded-sm mt-2 cursor-pointer bg-[#051131]'>Terms Visualization</button>
+    <button onClick={() => setCurrentIndex(1)} className='w-[100%] py-2 rounded-sm mt-2 cursor-pointer bg-[#051131]'>Financial Visualization</button>
+    <button onClick={() => setCurrentIndex(2)} className='w-[100%] py-2 rounded-sm mt-2 cursor-pointer bg-[#051131]'>T and F Visualization</button>
+     </div>
      
-     <div className='w-[100%] text-white flex flex-col items-center'>
-     <h1 className=' font-bold'>Earning Explorer</h1>
+     <div className='w-[80%] px-5 text-white overflow-scroll py-5 flex flex-col items-center'>
+     <h1 className='text-2xl font-bold'>Earning Explorer</h1>
      <h1>countries: {country}</h1>
      <h1>regions: {regions}</h1>
      <h1>companies: {companies}</h1>
@@ -212,26 +264,21 @@ console.log("here" + tfr)
      </div>
 
     <div className='grid grid-cols-3 gap-3 mt-4'>
-    <Card title="Companies Present Based On Filters" number={499} duration={3000} />
-    <Card title="Countries Present Based On Filters" number={19} duration={3000} />
-    <Card title="Sectors Present Based On Filters" number={67} duration={3000} />
-    <Card title="Countries Present Based On Filters" number={499} duration={3000} />
-    <Card title="Countries Present Based On Filters" number={499} duration={3000} />
-    <Card title="Countries Present Based On Filters" number={499} duration={3000} /> 
+    <Card title="Companies Present Based On Filters" number={card["Companies Present"]} duration={3000} />
+    <Card title="Countries Present Based On Filters" number={card["Countries Present"]} duration={3000} />
+    <Card title="Sectors Present Based On Filters" number={card["Sectors Present"]} duration={3000} />
+
+    <Card title="Total Revenue Across Companies" number={cardtwo["Total Revenue"]} duration={3000} />
+    <Card title="Total Operating Income Across Companies" number={cardtwo["Total Operating Income"]} duration={3000} />
+    <Card title="Total Gross Profit Across Companies" number={cardtwo["Total Gross Profit"]} duration={3000} /> 
+
+    <Card title="Average Revenue Across Companies" number={cardthree["Average Revenue"]} duration={3000} />
+    <Card title="Average Operating Income Across Companies" number={cardthree["Average Operating Income"]} duration={3000} />
+    <Card title="Average Gross Profit Across Companies" number={cardthree["Average Gross Profit"]} duration={3000} /> 
      </div>
 
-     <div className='flex gap-2'>
-     <div className='bg-blue-400 mt-4'>
-     <ApexChart options={radialOptions} series={radialOptions.series} type={radialOptions.chart.type} /> 
-     </div>
-
-     <div className='bg-white mt-4'>
-     <ApexChart options={heatmapOptions} series={heatmapOptions.series} type={heatmapOptions.chart.type} /> 
-     </div>
-
-     <div className='bg-white mt-4'>
-     <ApexChart options={options} series={options.series} type={options.chart.type} /> 
-     </div>
+     <div className='flex flex-wrap h-[100%]  px-10 w-[100%] gap-2'>
+     {Tabs[currentIndex]}
      </div>
      
      </div>
