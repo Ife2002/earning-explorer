@@ -1,26 +1,25 @@
 import Image from 'next/image'
-import React,{ useState, useRef, useEffect } from 'react';
-import Fliter from '../../expo/pages/components/Fliter';
-import Companies from '../../expo/pages/components/filters/Companies';
-import Country from '../../expo/pages/components/filters/Countries';
 import { Inter } from 'next/font/google'
-import Card from '../../expo/pages/components/Card';
-import axios from 'axios';
+import React,{ useState, useRef, useEffect } from 'react';
+import Fliter from './components/Fliter';
+import Country from './components/filters/Countries';
+import Sectors from './components/filters/Sectors';
+import Terms from './components/filters/Terms';
+import Companies from './components/filters/Companies';
+import NumberAnimation from './components/NumberAnimation';
 import Head from 'next/head';
-// import Fliter from './components/Fliter';
-//import SimpleWordcloud from './components/Word';
-// import BallAnimation from './components/Animation';
-import NumberAnimation from '../../expo/pages/components/NumberAnimation';
-import Tab from '../../expo/pages/components/Tab';
+import Card from './components/Card';
+
+import Tab from './components/Tab';
 import dynamic from 'next/dynamic';
-import Terms from '../../expo/pages/components/filters/Terms';
-import Sectors from '../../expo/pages/components/filters/Sectors';
 const ApexChart = dynamic(() => import('react-apexcharts'), { ssr: false });
+import axios from 'axios';
 
 
 const inter = Inter({ subsets: ['latin'] })
 
-export default function Home({  }) {
+export default function Home() {
+
   const [isOpen, setIsOpen] = useState(true);
   const [clickCount, setClickCount] = useState(0);
   const [filter, setFilter] = useState("Regions");
@@ -30,6 +29,7 @@ export default function Home({  }) {
   const [sectors, setSectors] = useState('All')
   const [terms, setTerms] = useState('All')
   const [list, setList] = useState(null)
+  const [card, setCard] = useState(null)
   const [drop, setDrop] = useState([
     {
       name: "North America"
@@ -52,11 +52,11 @@ export default function Home({  }) {
   const payload = {
     "from_year": 2018,
     "to_year": 2019,
-    "regions": ["All"],
-    "countries": ["All"],
-    "companies": ["All"],
-    "sectors": ["All"],
-    "terms": ["All"]
+    "regions": regions,
+    "countries": country,
+    "companies": companies,
+    "sectors": sectors,
+    "terms": terms
   }
 
       useEffect(() => {
@@ -66,6 +66,20 @@ export default function Home({  }) {
           const listjson = JSON.parse(response.data);
           console.log(listjson);
           setList(listjson)
+        })
+        .catch(error => {
+          // Handle the error
+          console.error(error);
+        });
+      }, []);
+
+      useEffect(() => {
+        const url = 'https://data-value-tool.up.railway.app/companies-countries-sectors'
+        axios.post(url, payload).then(response => {
+          // Handle the response data
+          const listjson = JSON.parse(response.data);
+          console.log(listjson);
+          setCard(listjson)
         })
         .catch(error => {
           // Handle the error
@@ -162,135 +176,41 @@ export default function Home({  }) {
     labels: ['Apples', 'Oranges', 'Bananas', 'Berries'],
   };
 
+
   return (
     <main
-      className={`flex min-h-screen w-[100%] flex-col items-center py-20 ${inter.className}`}
+      className={`flex min-h-screen bg-[#051131] flex-col items-center justify-between p-24 ${inter.className}`}
     >
-      <Head>
+    <Head>
         <title>Earning Explore || Data product LLC</title>
      </Head> 
      {/* <Fliter /> */}
-     <div className='w-[100%] flex flex-col items-center bg-green-800'>
+     
+     <div className='w-[100%] text-white flex flex-col items-center'>
+     <h1 className=' font-bold'>Earning Explorer</h1>
      <h1>countries: {country}</h1>
      <h1>regions: {regions}</h1>
      <h1>companies: {companies}</h1>
      <h1>terms: {terms}</h1>
      <h1>sectors: {sectors}</h1>
-     <div className='flex gap-2 px-4'>
+     <div className='flex gap-2 bg-white py-2 rounded-full px-2'>
      <Fliter data={list} setRegions={setRegions} regions={regions} />
      <Companies data={list} setCountry={setCompanies} country={companies} />
      <Country data={list} setCountry={setCountry} country={country} />
      <Terms data={list} setCountry={setTerms} country={terms} />
      <Sectors data={list} setCountry={setSectors} country={sectors} />
      </div>
-     
-     <Card />
+
+    <div className='grid grid-cols-3 gap-3 mt-4'>
+    <Card title="Companies Present Based On Filters" number={499} duration={3000} />
+    <Card title="Countries Present Based On Filters" number={19} duration={3000} />
+    <Card title="Sectors Present Based On Filters" number={67} duration={3000} />
+    <Card title="Countries Present Based On Filters" number={499} duration={3000} />
+    <Card title="Countries Present Based On Filters" number={499} duration={3000} />
+    <Card title="Countries Present Based On Filters" number={499} duration={3000} /> 
      </div>
-    
-    
+     
+     </div>
     </main>
   )
 }
-
-
-// export async function getStaticProps() {
-//   try {
-//     const payload = {
-//       "from_year": 2018,
-//       "to_year": 2019,
-//       "regions": ["All"],
-//       "countries": ["All"],
-//       "companies": ["All"],
-//       "sectors": ["All"],
-//       "terms": ["All"]
-//   }
-
-//     const response = await axios.post('https://data-value-tool.up.railway.app/get_filters', payload);
-//     const data = response.data;
-    
-//     console.log(data)
-//     console.log()
-//     return {
-//       props: {
-//         data
-//       }
-//     };
-//   } catch (error) {
-//     console.error(error);
-//     return {
-//       props: {
-//         data: null
-//       }
-//     };
-//   }
-// }
-
-// export async function getStaticProps() {
-//   // Define the URLs for your APIs
-//   const listData = 'https://data-value-tool.up.railway.app/get_filters';
-//   const cardData = 'https://data-value-tool.up.railway.app/companies-countries-sectors';
-//   const quarterlyCountData = 'https://data-value-tool.up.railway.app/individual-quarterly-terms-count';
-//   const termsfrequencyData = 'https://data-value-tool.up.railway.app/terms-frequencies-over-years-quarter';
-//   const topfiveRevenueData = 'https://data-value-tool.up.railway.app/top-5-terms-by-revenue';
-
-//   try {
-//     // Make the API requests
-//     const payload = {
-//       "from_year": 2018,
-//       "to_year": 2022,
-//       "regions": ["All"],
-//       "countries": ["All"],
-//       "companies": ["All"],
-//       "sectors": ["All"],
-//       "terms": ["All"]
-//   }
-  
-//     const [response1, response2, response3, response4, response5 ] = await Promise.all([
-//       axios.post(listData, payload),
-//       axios.post(cardData, payload),
-//       axios.post(quarterlyCountData, payload),
-//       axios.post(termsfrequencyData, payload),
-//       axios.post(topfiveRevenueData, payload),
-//     ]);
-
-//     // Extract the data from the responses
-//     const list = response1.data;
-//     const card = response2.data;
-//     const QCD = JSON.parse(response3.data);
-//     const TFD = JSON.parse(response4.data);
-//     const TFRD = response5.data
-
-//     const listjson = JSON.parse(list);
-//     const cardjson = JSON.parse(card);
-//     const qjson = QCD
-//     const tjson = TFD
-//     const tfrdjson = TRFD
-//     console.log(qjson)
-//     console.log(cardjson)
-
-//     // Return the data as props
-//     return {
-//       props: {
-//         listjson,
-//         cardjson,
-//         qjson,
-//         tjson,
-//         tfrdjson
-//       }
-//     };
-//   } catch (error) {
-//     // Handle any errors that occur during the API requests
-//     console.error('Error fetching data:', error);
-//     // You can return an error prop or fallback data here if needed
-//     return {
-//       props: {
-//         listjson: [],
-//         cardjson: [],
-//         qjson: [],
-//         tjson: [],
-//         tfrdjson: []
-//       }
-//     };
-//   }
-  
-// }
