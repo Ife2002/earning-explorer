@@ -8,8 +8,8 @@ import * as React from "react";
     //   Constraint
     // } from "react-matter-js";
     import dynamic from 'next/dynamic';
-    const Matter = dynamic(() => import('react-matter-js'), { ssr: false });
-    import { Global, css } from "@emotion/react";
+    // const Matter = dynamic(() => import('react-matter-js'), { ssr: false });
+
 
 // BallAnimation = () => {
     

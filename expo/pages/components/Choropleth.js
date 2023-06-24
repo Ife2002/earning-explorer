@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { MapContainer, TileLayer, GeoJSON } from 'react-leaflet';
+
 
 const ChoroplethMap = () => {
   const [geojsonData, setGeojsonData] = useState(null);
