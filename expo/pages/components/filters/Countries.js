@@ -32,7 +32,7 @@ function Country({ country, setCountry, data }) {
     
 
   return (
-    <div className='flex flex-wrap bg-white'>
+    <div className='flex flex-wrap'>
     {/* Render the selected tags */}
     
     {/* Render the dropdown */}

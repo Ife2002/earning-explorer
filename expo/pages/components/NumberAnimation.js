@@ -8,7 +8,7 @@ const NumberAnimation = ({ number, duration }) => {
     config: { duration: duration },
   });
 
-  return <animated.span>{value.interpolate((val) => Math.floor(val))}</animated.span>;
+  return <animated.span className={`text-xl`}>{value.interpolate((val) => Math.floor(val))}</animated.span>;
 };
 
 export default NumberAnimation;

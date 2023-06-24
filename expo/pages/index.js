@@ -108,6 +108,26 @@ export default function Home() {
 
 console.log("here" + JSON.stringify(cardthree))
 
+function formatNumber(value) {
+  const trillion = 1000000000000;
+  const billion = 1000000000;
+
+  if (value >= trillion) {
+    const roundedValue = (value / trillion).toFixed(2);
+    return `${roundedValue}T`;
+  } else if (value >= billion) {
+    const roundedValue = (value / billion).toFixed(2);
+    return `${roundedValue}B`;
+  } else {
+    const roundedValue = value.toFixed(2);
+    return roundedValue;
+  }
+}
+
+
+const check = formatNumber(122300000000)
+console.log(check)
+
   const SectorsHead = ["All sectors"]
   // console.log("find" + JSON.stringify(list))
   const handleClick = (listname) => {
@@ -202,7 +222,7 @@ console.log("here" + JSON.stringify(cardthree))
   };
 
   const Tabs = [
-    <div className='bg-green-300 h-[100%] w-[100%]'>
+    <div className='bg-green-300 flex flex-row justify-center h-[100%] w-[100%]'>
     <div className='bg-blue-400 mt-4'>
      <ApexChart options={radialOptions} series={radialOptions.series} type={radialOptions.chart.type} /> 
      </div>
@@ -247,14 +267,14 @@ console.log("here" + JSON.stringify(cardthree))
     <button onClick={() => setCurrentIndex(2)} className='w-[100%] py-2 rounded-sm mt-2 cursor-pointer bg-[#051131]'>T and F Visualization</button>
      </div>
      
-     <div className='w-[80%] px-5 text-white py-5 flex flex-col items-center'>
-     <h1 className='text-2xl font-bold'>Earning Explorer</h1>
-     <h1>countries: {country}</h1>
+     <div className='w-[80%] h-[!00] px-5 text-white py-5 flex flex-col items-center'>
+     <h1 className='text-2xl font-bold py-6'>Earning Explorer</h1>
+     {/* <h1>countries: {country}</h1>
      <h1>regions: {regions}</h1>
      <h1>companies: {companies}</h1>
      <h1>terms: {terms}</h1>
-     <h1>sectors: {sectors}</h1>
-     <div className='flex gap-2 bg-white py-2 rounded-full px-2'>
+     <h1>sectors: {sectors}</h1> */}
+     <div className='flex gap-2 border-white border-y-[1px] py-2 px-2'>
      <Fliter data={list} setRegions={setRegions} regions={regions} />
      <Companies data={list} setCountry={setCompanies} country={companies} />
      <Country data={list} setCountry={setCountry} country={country} />
@@ -262,7 +282,7 @@ console.log("here" + JSON.stringify(cardthree))
      <Sectors data={list} setCountry={setSectors} country={sectors} />
      </div>
 
-    <div className='grid grid-cols-3 gap-3 mt-4'>
+    <div className='grid grid-cols-3 gap-6 mt-4'>
     <Card title="Companies Present Based On Filters" number={card["Companies Present"]} duration={3000} />
     <Card title="Countries Present Based On Filters" number={card["Countries Present"]} duration={3000} />
     <Card title="Sectors Present Based On Filters" number={card["Sectors Present"]} duration={3000} />
@@ -276,7 +296,8 @@ console.log("here" + JSON.stringify(cardthree))
     <Card title="Average Gross Profit Across Companies" number={cardthree["Average Gross Profit"]} duration={3000} /> 
      </div>
 
-     <div className='flex flex-wrap h-[100%]  px-10 w-[100%] gap-2'>
+     <div className=' h-[100%]  px-10 w-[100%] gap-2'>
+     <h1 className='text-3xl py-3 font-bold'>Visualization</h1>
      {Tabs[currentIndex]}
      </div>
      
