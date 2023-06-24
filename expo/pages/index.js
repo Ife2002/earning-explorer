@@ -11,11 +11,10 @@ import NumberAnimation from './components/NumberAnimation';
 import Head from 'next/head';
 import Card from './components/Card';
 
-import Tab from './components/Tab';
 import dynamic from 'next/dynamic';
 const ApexChart = dynamic(() => import('react-apexcharts'), { ssr: false });
 import axios from 'axios';
-import RangeSlider from './components/Slider';
+
 
 
 const inter = Inter({ subsets: ['latin'] })
