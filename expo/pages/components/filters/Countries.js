@@ -44,7 +44,7 @@ function Country({ country, setCountry, data }) {
       ))}
       {/* Add more options as needed */}
     </select>
-    <div>
+    <div className='bg-[#051131] text-white'>
       {selectedTags.map((tag, index) => (
         <div className='cursor-pointer' key={index}>{tag} <button onClick={() => removeTag(tag)}>x</button></div>
       ))}
