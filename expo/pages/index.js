@@ -203,7 +203,7 @@ console.log("here" + JSON.stringify(cardthree))
   };
 
   const Tabs = [
-    <div className='bg-green-300 h-[10rem] w-[100%]'>
+    <div className='bg-green-300 h-[100%] w-[100%]'>
     <div className='bg-blue-400 mt-4'>
      <ApexChart options={radialOptions} series={radialOptions.series} type={radialOptions.chart.type} /> 
      </div>
@@ -212,7 +212,7 @@ console.log("here" + JSON.stringify(cardthree))
      <ApexChart options={heatmapOptions} series={heatmapOptions.series} type={heatmapOptions.chart.type} /> 
      </div>
     </div>,
-    <div className='bg-purple-300 h-[10rem] w-[100%]'>
+    <div className='bg-purple-300 h-[100%] w-[100%]'>
       <div className='bg-white mt-4'>
      <ApexChart options={heatmapOptions} series={heatmapOptions.series} type={heatmapOptions.chart.type} /> 
      </div>
@@ -220,7 +220,7 @@ console.log("here" + JSON.stringify(cardthree))
      <ApexChart options={options} series={options.series} type={options.chart.type} /> 
      </div>
     </div>,
-    <div className='bg-red-300 h-[10rem] w-[100%]'>
+    <div className='bg-red-300 h-[100%] w-[100%]'>
       <div className='bg-white mt-4'>
      <ApexChart options={options} series={options.series} type={options.chart.type} /> 
      </div>
@@ -248,7 +248,7 @@ console.log("here" + JSON.stringify(cardthree))
     <button onClick={() => setCurrentIndex(2)} className='w-[100%] py-2 rounded-sm mt-2 cursor-pointer bg-[#051131]'>T and F Visualization</button>
      </div>
      
-     <div className='w-[80%] px-5 text-white overflow-scroll py-5 flex flex-col items-center'>
+     <div className='w-[80%] px-5 text-white py-5 flex flex-col items-center'>
      <h1 className='text-2xl font-bold'>Earning Explorer</h1>
      <h1>countries: {country}</h1>
      <h1>regions: {regions}</h1>
