@@ -35,6 +35,7 @@ export default function Home() {
   const [list, setList] = useState(null)
   const [tfr, setTfr] = useState(null)
   const [tfo, setTfo] = useState(null)
+  const [btr, setBtr] = useState(null)
   const [card, setCard] = useState(null);
   const [cardtwo, setCardtwo] = useState(null)
   const [cardthree, setCardthree] = useState(null)
@@ -75,9 +76,10 @@ export default function Home() {
           const url2 = 'https://data-value-tool.up.railway.app/companies-countries-sectors'
           const url3 = 'https://data-value-tool.up.railway.app/individual-quarterly-terms-count';
           const url4 = 'https://data-value-tool.up.railway.app/terms-frequencies-over-years-quarter';
-          const url5 = 'https://data-value-tool.up.railway.app/terms-frequencies-over-years-quarter';
+          const url5 = 'https://data-value-tool.up.railway.app/top-5-terms-by-revenue';
           const url6 = 'https://data-value-tool.up.railway.app/total-financials';
           const url7 = 'https://data-value-tool.up.railway.app/average-financials';
+          const url8 = 'https://data-value-tool.up.railway.app/bottom-5-terms-by-revenue';
       
           try {
             const response1 = await axios.post(url, payload);
@@ -87,6 +89,7 @@ export default function Home() {
             const response5 = await axios.post(url5, payload);
             const response6 = await axios.post(url6, payload);
             const response7 = await axios.post(url7, payload);
+            const response8 = await axios.post(url8, payload);
 
             setList(JSON.parse(response1.data))
             setCard(JSON.parse(response2.data))
@@ -95,6 +98,7 @@ export default function Home() {
             setTfo(JSON.parse(response5.data))
             setCardtwo(JSON.parse(response6.data))
             setCardthree(JSON.parse(response7.data))
+            setBtr(JSON.parse(response8.data))
             setIsLoading(false)
            // console.log(card);
           //console.log(list)
@@ -106,27 +110,24 @@ export default function Home() {
         fetchData();
       }, [payload]);
 
-console.log("here" + JSON.stringify(cardthree))
+console.log("here" + JSON.stringify(btr))
+//console.log(cardtwo["Total Revenue"])
+// function formatNumber(value) {
+//   const trillion = 1000000000000;
+//   const billion = 1000000000;
 
-function formatNumber(value) {
-  const trillion = 1000000000000;
-  const billion = 1000000000;
+//   if (value >= trillion) {
+//     const roundedValue = (value / trillion).toFixed(2);
+//     return roundedValue;
+//   } else if (value >= billion) {
+//     const roundedValue = (value / billion).toFixed(2);
+//     return roundedValue;
+//   } else {
+//     const roundedValue = value.toFixed(2);
+//     return roundedValue;
+//   }
+// }
 
-  if (value >= trillion) {
-    const roundedValue = (value / trillion).toFixed(2);
-    return `${roundedValue}T`;
-  } else if (value >= billion) {
-    const roundedValue = (value / billion).toFixed(2);
-    return `${roundedValue}B`;
-  } else {
-    const roundedValue = value.toFixed(2);
-    return roundedValue;
-  }
-}
-
-
-const check = formatNumber(122300000000)
-console.log(check)
 
   const SectorsHead = ["All sectors"]
   // console.log("find" + JSON.stringify(list))
@@ -183,21 +184,12 @@ console.log(check)
 
   const radial_data = []
 
-  for (let i = 0; i < tfr?.labels.length; i++) {
-    const series_element = {
-      name : tfo?.labels[i],
-      data : tfo?.data[i]
-    }
-
-    radial_data.push(series_element)
-    
-  };
 
   const radialOptions = {
     chart: {
       type: 'radialBar' //qjson.type
     },
-    series: radial_data,
+    series: tfo?.data,
     plotOptions: {
       radialBar: {
         dataLabels: {
@@ -221,8 +213,36 @@ console.log(check)
     labels: tfo?.labels,
   };
 
+  const radialTwoOptions = {
+    chart: {
+      type: 'radialBar' //qjson.type
+    },
+    series: btr?.data,
+    plotOptions: {
+      radialBar: {
+        dataLabels: {
+          name: {
+            fontSize: '22px',
+          },
+          value: {
+            fontSize: '16px',
+          },
+          total: {
+            show: true,
+            label: 'Total',
+            formatter: function (w) {
+              // By default this function returns the average of all series. The below is just an example to show the use of custom formatter function
+              return 249
+            }
+          }
+        }
+      }
+    },
+    labels: btr?.labels,
+  };
+
   const Tabs = [
-    <div className='bg-green-300 flex flex-row justify-center h-[100%] w-[100%]'>
+    <div className='flex flex-row justify-between h-[100%] w-[100%]'>
     <div className='bg-blue-400 mt-4'>
      <ApexChart options={radialOptions} series={radialOptions.series} type={radialOptions.chart.type} /> 
      </div>
@@ -230,11 +250,20 @@ console.log(check)
      <div className='bg-white mt-4'>
      <ApexChart options={heatmapOptions} series={heatmapOptions.series} type={heatmapOptions.chart.type} /> 
      </div>
+
+     <div className='bg-white mt-4'>
+     <ApexChart options={heatmapOptions} series={heatmapOptions.series} type={heatmapOptions.chart.type} /> 
+     </div>
     </div>,
-    <div className='bg-purple-300 h-[100%] w-[100%]'>
+    <div className='flex flex-row justify-between h-[100%] w-[100%]'>
       <div className='bg-white mt-4'>
      <ApexChart options={heatmapOptions} series={heatmapOptions.series} type={heatmapOptions.chart.type} /> 
      </div>
+     
+     <div className='bg-blue-400 mt-4'>
+     <ApexChart options={radialTwoOptions} series={radialTwoOptions.series} type={radialTwoOptions.chart.type} /> 
+     </div>
+
      <div className='bg-white mt-4'>
      <ApexChart options={options} series={options.series} type={options.chart.type} /> 
      </div>
@@ -269,11 +298,11 @@ console.log(check)
      
      <div className='w-[80%] h-[!00] px-5 text-white py-5 flex flex-col items-center'>
      <h1 className='text-2xl font-bold py-6'>Earning Explorer</h1>
-     {/* <h1>countries: {country}</h1>
+     <h1>countries: {country}</h1>
      <h1>regions: {regions}</h1>
      <h1>companies: {companies}</h1>
      <h1>terms: {terms}</h1>
-     <h1>sectors: {sectors}</h1> */}
+     <h1>sectors: {sectors}</h1>
      <div className='flex gap-2 border-white border-y-[1px] py-2 px-2'>
      <Fliter data={list} setRegions={setRegions} regions={regions} />
      <Companies data={list} setCountry={setCompanies} country={companies} />
