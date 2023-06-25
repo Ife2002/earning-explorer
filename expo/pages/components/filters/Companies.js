@@ -28,7 +28,10 @@ function Companies({ country, setCountry, data, selectedTags, setSelectedTags })
       onValueChange(value);
     };
 
-    
+    if (typeof selectedTags === 'undefined') {
+      // Handle the case where selectedTags is undefined
+      return null; // or render a fallback UI
+    }  
 
   return (
     <div className='flex flex-wrap'>

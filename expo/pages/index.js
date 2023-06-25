@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import { Inter } from 'next/font/google'
 import React,{ useState, useRef, useEffect } from 'react';
+import { Bars } from  'react-loader-spinner'
 import Fliter from './components/Fliter';
 import Country from './components/filters/Countries';
 import Sectors from './components/filters/Sectors';
@@ -60,7 +61,7 @@ export default function Home() {
   const divRef = useRef(null);
 
   const payload = {
-    "from_year": 2018,
+    "from_year": 2012,
     "to_year": 2019,
     "regions": regions,
     "countries": country,
@@ -182,39 +183,364 @@ console.log("here" + JSON.stringify(btr))
       type: tfr?.type
     },
     series: series_data,
+    colors: ["#1652f0"]
   };
 
   const radial_data = []
 
 
-  const radialOptions = {
+  const radialOptionsTopFRev = {
     chart: {
       type: 'radialBar' //qjson.type
     },
     series: tfo?.data,
     plotOptions: {
       radialBar: {
+        offsetY: 0,
+        startAngle: 0,
+        endAngle: 270,
+        hollow: {
+          margin: 5,
+          size: '30%',
+          background: 'transparent',
+          image: undefined,
+        },
         dataLabels: {
           name: {
-            fontSize: '22px',
+            show: false,
           },
           value: {
-            fontSize: '16px',
-          },
-          total: {
-            show: true,
-            label: 'Total',
-            formatter: function (w) {
-              // By default this function returns the average of all series. The below is just an example to show the use of custom formatter function
-              return 249
-            }
+            show: false,
           }
         }
       }
     },
+    colors: ['#1ab7ea', '#0084ff', '#39539E', '#0077B5'],
+    legend: {
+      show: true,
+      floating: true,
+      fontSize: '16px',
+      position: 'left',
+      offsetX: 160,
+      offsetY: 15,
+      labels: {
+        useSeriesColors: true,
+      },
+      markers: {
+        size: 0
+      },
+      formatter: function(seriesName, opts) {
+        return seriesName + ":  " + opts.w.globals.series[opts.seriesIndex]
+      },
+      itemMargin: {
+        vertical: 3
+      }
+    },
+    responsive: [{
+      breakpoint: 480,
+      options: {
+        legend: {
+            show: false
+        }
+      }
+    }],
     labels: tfo?.labels,
   };
 
+
+  const radialOptionsBottomFRev = {
+    chart: {
+      type: 'radialBar' //qjson.type
+    },
+    series: tfo?.data,
+    plotOptions: {
+      radialBar: {
+        offsetY: 0,
+        startAngle: 0,
+        endAngle: 270,
+        hollow: {
+          margin: 5,
+          size: '30%',
+          background: 'transparent',
+          image: undefined,
+        },
+        dataLabels: {
+          name: {
+            show: false,
+          },
+          value: {
+            show: false,
+          }
+        }
+      }
+    },
+    colors: ['#1ab7ea', '#0084ff', '#39539E', '#0077B5'],
+    legend: {
+      show: true,
+      floating: true,
+      fontSize: '16px',
+      position: 'left',
+      offsetX: 160,
+      offsetY: 15,
+      labels: {
+        useSeriesColors: true,
+      },
+      markers: {
+        size: 0
+      },
+      formatter: function(seriesName, opts) {
+        return seriesName + ":  " + opts.w.globals.series[opts.seriesIndex]
+      },
+      itemMargin: {
+        vertical: 3
+      }
+    },
+    responsive: [{
+      breakpoint: 480,
+      options: {
+        legend: {
+            show: false
+        }
+      }
+    }],
+    labels: tfo?.labels,
+  };
+
+
+  const radialOptionsTopFCostRev = {
+    chart: {
+      type: 'radialBar' //qjson.type
+    },
+    series: tfo?.data,
+    plotOptions: {
+      radialBar: {
+        offsetY: 0,
+        startAngle: 0,
+        endAngle: 270,
+        hollow: {
+          margin: 5,
+          size: '30%',
+          background: 'transparent',
+          image: undefined,
+        },
+        dataLabels: {
+          name: {
+            show: false,
+          },
+          value: {
+            show: false,
+          }
+        }
+      }
+    },
+    colors: ['#1ab7ea', '#0084ff', '#39539E', '#0077B5'],
+    legend: {
+      show: true,
+      floating: true,
+      fontSize: '16px',
+      position: 'left',
+      offsetX: 160,
+      offsetY: 15,
+      labels: {
+        useSeriesColors: true,
+      },
+      markers: {
+        size: 0
+      },
+      formatter: function(seriesName, opts) {
+        return seriesName + ":  " + opts.w.globals.series[opts.seriesIndex]
+      },
+      itemMargin: {
+        vertical: 3
+      }
+    },
+    responsive: [{
+      breakpoint: 480,
+      options: {
+        legend: {
+            show: false
+        }
+      }
+    }],
+    labels: tfo?.labels,
+  };
+
+  const radialOptionsBottomFCostRev = {
+    chart: {
+      type: 'radialBar' //qjson.type
+    },
+    series: tfo?.data,
+    plotOptions: {
+      radialBar: {
+        offsetY: 0,
+        startAngle: 0,
+        endAngle: 270,
+        hollow: {
+          margin: 5,
+          size: '30%',
+          background: 'transparent',
+          image: undefined,
+        },
+        dataLabels: {
+          name: {
+            show: false,
+          },
+          value: {
+            show: false,
+          }
+        }
+      }
+    },
+    colors: ['#1ab7ea', '#0084ff', '#39539E', '#0077B5'],
+    legend: {
+      show: true,
+      floating: true,
+      fontSize: '16px',
+      position: 'left',
+      offsetX: 160,
+      offsetY: 15,
+      labels: {
+        useSeriesColors: true,
+      },
+      markers: {
+        size: 0
+      },
+      formatter: function(seriesName, opts) {
+        return seriesName + ":  " + opts.w.globals.series[opts.seriesIndex]
+      },
+      itemMargin: {
+        vertical: 3
+      }
+    },
+    responsive: [{
+      breakpoint: 480,
+      options: {
+        legend: {
+            show: false
+        }
+      }
+    }],
+    labels: tfo?.labels,
+  };
+
+
+  const radialOptionsTopFOprInc = {
+    chart: {
+      type: 'radialBar' //qjson.type
+    },
+    series: tfo?.data,
+    plotOptions: {
+      radialBar: {
+        offsetY: 0,
+        startAngle: 0,
+        endAngle: 270,
+        hollow: {
+          margin: 5,
+          size: '30%',
+          background: 'transparent',
+          image: undefined,
+        },
+        dataLabels: {
+          name: {
+            show: false,
+          },
+          value: {
+            show: false,
+          }
+        }
+      }
+    },
+    colors: ['#1ab7ea', '#0084ff', '#39539E', '#0077B5'],
+    legend: {
+      show: true,
+      floating: true,
+      fontSize: '16px',
+      position: 'left',
+      offsetX: 160,
+      offsetY: 15,
+      labels: {
+        useSeriesColors: true,
+      },
+      markers: {
+        size: 0
+      },
+      formatter: function(seriesName, opts) {
+        return seriesName + ":  " + opts.w.globals.series[opts.seriesIndex]
+      },
+      itemMargin: {
+        vertical: 3
+      }
+    },
+    responsive: [{
+      breakpoint: 480,
+      options: {
+        legend: {
+            show: false
+        }
+      }
+    }],
+    labels: tfo?.labels,
+  };
+
+  const radialOptionsBottomFOprInc = {
+    chart: {
+      type: 'radialBar' //qjson.type
+    },
+    series: tfo?.data,
+    plotOptions: {
+      radialBar: {
+        offsetY: 0,
+        startAngle: 0,
+        endAngle: 270,
+        hollow: {
+          margin: 5,
+          size: '30%',
+          background: 'transparent',
+          image: undefined,
+        },
+        dataLabels: {
+          name: {
+            show: false,
+          },
+          value: {
+            show: false,
+          }
+        }
+      }
+    },
+    colors: ['#1ab7ea', '#0084ff', '#39539E', '#0077B5'],
+    legend: {
+      show: true,
+      floating: true,
+      fontSize: '16px',
+      position: 'left',
+      offsetX: 160,
+      offsetY: 15,
+      labels: {
+        useSeriesColors: true,
+      },
+      markers: {
+        size: 0
+      },
+      formatter: function(seriesName, opts) {
+        return seriesName + ":  " + opts.w.globals.series[opts.seriesIndex]
+      },
+      itemMargin: {
+        vertical: 3
+      }
+    },
+    responsive: [{
+      breakpoint: 480,
+      options: {
+        legend: {
+            show: false
+        }
+      }
+    }],
+    labels: tfo?.labels,
+  };
+
+  //duplicate this and rename to radialThreeOptions
   const radialTwoOptions = {
     chart: {
       type: 'radialBar' //qjson.type
@@ -244,19 +570,37 @@ console.log("here" + JSON.stringify(btr))
   };
 
   const Tabs = [
-    <div className='flex flex-row justify-between h-[100%] w-[100%]'>
-    <div className='bg-blue-400 mt-4'>
-     <ApexChart options={radialOptions} series={radialOptions.series} type={radialOptions.chart.type} /> 
+    <div className='flex flex-wrap justify-between h-[100%] w-[100%]'>
+    <div className='bg-white rounded-lg p-3 mt-4'>
+     <ApexChart options={radialOptionsTopFRev} series={radialOptionsTopFRev.series} type={radialOptionsTopFRev.chart.type} /> 
+     </div>
+    
+     <div className='bg-white rounded-lg p-3 mt-4'>
+     <ApexChart options={radialOptionsBottomFRev} series={radialOptionsBottomFRev.series} type={radialOptionsBottomFRev.chart.type} /> 
      </div>
 
-     <div className='bg-white mt-4'>
-     <ApexChart options={heatmapOptions} series={heatmapOptions.series} type={heatmapOptions.chart.type} /> 
+     <div className='bg-white rounded-lg p-3 mt-4'>
+     <ApexChart options={radialOptionsTopFCostRev} series={radialOptionsTopFCostRev.series} type={radialOptionsTopFCostRev.chart.type} /> 
      </div>
 
-     <div className='bg-white mt-4'>
+     <div className='bg-white rounded-lg p-3 mt-4'>
+     <ApexChart options={radialOptionsBottomFCostRev} series={radialOptionsBottomFCostRev.series} type={radialOptionsBottomFCostRev.chart.type} /> 
+     </div>
+
+     <div className='bg-white rounded-lg p-3 mt-4'>
+     <ApexChart options={radialOptionsTopFOprInc} series={radialOptionsTopFOprInc.series} type={radialOptionsTopFOprInc.chart.type} /> 
+     </div>
+
+     <div className='bg-white rounded-lg p-3 mt-4'>
+     <ApexChart options={radialOptionsBottomFOprInc} series={radialOptionsBottomFOprInc.series} type={radialOptionsBottomFOprInc.chart.type} /> 
+     </div>
+
+     <div className='bg-white rounded-lg p-3 mt-4'>
      <ApexChart options={heatmapOptions} series={heatmapOptions.series} type={heatmapOptions.chart.type} /> 
      </div>
+     
     </div>,
+
     <div className='flex flex-row justify-between h-[100%] w-[100%]'>
       <div className='bg-white mt-4'>
      <ApexChart options={heatmapOptions} series={heatmapOptions.series} type={heatmapOptions.chart.type} /> 
@@ -266,10 +610,15 @@ console.log("here" + JSON.stringify(btr))
      <ApexChart options={radialTwoOptions} series={radialTwoOptions.series} type={radialTwoOptions.chart.type} /> 
      </div>
 
-     <div className='bg-white mt-4'>
+     <div className='bg-blue-400 mt-4'>
+     <ApexChart options={radialTwoOptions} series={radialTwoOptions.series} type={radialTwoOptions.chart.type} /> 
+     </div>
+
+     <div className='bg-black mt-4'>
      <ApexChart options={options} series={options.series} type={options.chart.type} /> 
      </div>
     </div>,
+
     <div className='flex flex-row justify-between h-[100%] w-[100%]'>
       <div className='bg-white mt-4'>
      <ApexChart options={options} series={options.series} type={options.chart.type} /> 
@@ -277,18 +626,24 @@ console.log("here" + JSON.stringify(btr))
     </div>
 ]
 
-function removeTag(tag) {
-  const updatedTags = selectedTags.filter((selectedTag) => selectedTag !== tag);
-  setCompanies((prevRegions) => prevRegions.filter((region) => region !== tag));
-  setSelectedTags(updatedTags);
-}
+
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <div className='w-[100%] h-[100vh] bg-white flex justify-center items-center'>
+      <Bars
+  height="80"
+  width="80"
+  color="#1652f0"
+  ariaLabel="bars-loading"
+  wrapperStyle={{}}
+  wrapperClass=""
+  visible={true}
+/>
+    </div>;
   }
   return (
     <main
-      className={`flex min-h-screen bg-[#051131] flex-row ${inter.className}`}
+      className={`flex min-h-screen bg-[#e3edf7] flex-row ${inter.className}`}
     >
     <Head>
         <title>Earning Explore || Data product LLC</title>
@@ -296,33 +651,28 @@ function removeTag(tag) {
      {/* <Fliter /> */}
      <div className='bg-white text-white sticky top-0 left-0 h-[100vh] px-2 w-[20%]'>
       <div className='border-black border-b-2 py-5 mx-3 flex justify-center'>
-      <h1 className='font-bold text-black text-2xl'>Earning Explorer</h1>
+      <h1 className='font-bold text-[#1b254b] text-2xl'>Earning Explorer</h1>
       </div>
       
      <button onClick={() => setCurrentIndex(0)} className='w-[100%] py-2 rounded-sm mt-2 cursor-pointer bg-[#051131]'>Terms Visualization</button>
-    <button onClick={() => setCurrentIndex(1)} className='w-[100%] py-2 rounded-sm mt-2 cursor-pointer bg-[#051131]'>Financial Visualization</button>
-    <button onClick={() => setCurrentIndex(2)} className='w-[100%] py-2 rounded-sm mt-2 cursor-pointer bg-[#051131]'>T and F Visualization</button>
+     <button onClick={() => setCurrentIndex(1)} className='w-[100%] py-2 rounded-sm mt-2 cursor-pointer bg-[#051131]'>Financial Visualization</button>
+     <button onClick={() => setCurrentIndex(2)} className='w-[100%] py-2 rounded-sm mt-2 cursor-pointer bg-[#051131]'>T and F Visualization</button>
      </div>
      
-     <div className='w-[80%] h-[!00] px-5 text-white py-5 flex flex-col items-center'>
-     <h1 className='text-2xl font-bold py-6'>Earning Explorer</h1>
-     <h1>countries: {country}</h1>
-     <h1>regions: {regions}</h1>
-     <h1>companies: {companies}</h1>
-     <h1>terms: {terms}</h1>
-     <h1>sectors: {sectors}</h1>
+     <div className='w-[80%] h-[100%] px-5 text-white py-5 flex flex-col items-center'>
+     <h1 className='text-2xl text-[#1b254b] font-bold py-6'>Earning Explorer</h1>
      <div className='flex gap-2 border-white border-y-[1px] py-2 px-2'>
      <Fliter data={list} setRegions={setRegions} regions={regions} />
      
      <Companies data={list} setSelectedTags={setSelectedTags} selectedTags={selectedTags} setCountry={setCompanies} country={companies} />
-     <Country data={list} setCountry={setCountry} country={country} />
-     <Terms data={list} setCountry={setTerms} country={terms} />
-     <Sectors data={list} setCountry={setSectors} country={sectors} />
+     <Country data={list} setSelectedTags={setSelectedTags} selectedTags={selectedTags} setCountry={setCountry} country={country} />
+     <Terms data={list} setSelectedTags={setSelectedTags} selectedTags={selectedTags} setCountry={setTerms} country={terms} />
+     <Sectors data={list} setSelectedTags={setSelectedTags} selectedTags={selectedTags} setCountry={setSectors} country={sectors} />
      </div>
 
-     <div className='flex flex-row gap-2'>
+     <div className='flex flex-row mt-2 w-[100%] gap-2'>
       {selectedTags.map((tag, index) => (
-        <div className='cursor-pointer' key={index}>{tag} <button onClick={() => removeTag(tag)}>x</button></div>
+        <div className='cursor-pointer border-[#051131] text-[#051131] px-4 rounded-full border-[2px]' key={index}>{tag} <button onClick={() => removeTag(tag)}>x</button></div>
       ))}
     </div>
 
@@ -341,7 +691,7 @@ function removeTag(tag) {
      </div>
 
      <div className=' h-[100%]  px-10 w-[100%] gap-2'>
-     <h1 className='text-3xl py-3 font-bold'>Visualization</h1>
+     <h1 className='text-3xl py-3 text-[#1b254b] font-bold'>Visualization</h1>
      {Tabs[currentIndex]}
      </div>
      

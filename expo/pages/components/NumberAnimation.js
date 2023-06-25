@@ -24,13 +24,13 @@ const NumberAnimation = ({ number, duration }) => {
       return `${(val / 1000).toFixed(2)}K`;
     } else {
       // Less than thousand
-      return val.toFixed(2);
+      return val;
     }
   };
 
   
 
-  return <animated.span className={`text-xl`}>{value.interpolate((val) => formatNumber(Math.floor(val)))}</animated.span>;
+  return <animated.span className={`text-2xl font-bold`}>{value.interpolate((val) => formatNumber(Math.floor(val)))}</animated.span>;
 };
 
 export default NumberAnimation;

@@ -1,8 +1,7 @@
 import React,{ useState, useEffect} from 'react'
 import axios from 'axios';
 
-function Country({ country, setCountry, data }) {
-    const [selectedTags, setSelectedTags] = useState([]);
+function Country({ country, setCountry, data, selectedTags, setSelectedTags }) {
     const [list, setList] = useState(['list'])
     
   
@@ -29,7 +28,10 @@ function Country({ country, setCountry, data }) {
       onValueChange(value);
     };
 
-    
+    if (typeof selectedTags === 'undefined') {
+      // Handle the case where selectedTags is undefined
+      return null; // or render a fallback UI
+    }  
 
   return (
     <div className='flex flex-wrap'>
@@ -44,11 +46,6 @@ function Country({ country, setCountry, data }) {
       ))}
       {/* Add more options as needed */}
     </select>
-    <div className='bg-[#051131] text-white'>
-      {selectedTags.map((tag, index) => (
-        <div className='cursor-pointer' key={index}>{tag} <button onClick={() => removeTag(tag)}>x</button></div>
-      ))}
-    </div>
     
   </div>
   )
