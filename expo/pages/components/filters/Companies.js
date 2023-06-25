@@ -1,8 +1,7 @@
 import React,{ useState, useEffect} from 'react'
 import axios from 'axios';
 
-function Companies({ country, setCountry, data }) {
-    const [selectedTags, setSelectedTags] = useState([]);
+function Companies({ country, setCountry, data, selectedTags, setSelectedTags }) {
     const [list, setList] = useState(['list'])
     
   
@@ -44,11 +43,7 @@ function Companies({ country, setCountry, data }) {
       ))}
       {/* Add more options as needed */}
     </select>
-    <div>
-      {selectedTags.map((tag, index) => (
-        <div className='cursor-pointer' key={index}>{tag} <button onClick={() => removeTag(tag)}>x</button></div>
-      ))}
-    </div>
+    
     
   </div>
   )

@@ -29,6 +29,7 @@ export default function Home() {
   const [country, setCountry] = useState('All')
   const [regions, setRegions] = useState('All')
   const [companies, setCompanies] = useState('All')
+  const [selectedTags, setSelectedTags] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [sectors, setSectors] = useState('All')
   const [terms, setTerms] = useState('All')
@@ -127,6 +128,7 @@ console.log("here" + JSON.stringify(btr))
 //     return roundedValue;
 //   }
 // }
+
 
 
   const SectorsHead = ["All sectors"]
@@ -275,6 +277,12 @@ console.log("here" + JSON.stringify(btr))
     </div>
 ]
 
+function removeTag(tag) {
+  const updatedTags = selectedTags.filter((selectedTag) => selectedTag !== tag);
+  setCompanies((prevRegions) => prevRegions.filter((region) => region !== tag));
+  setSelectedTags(updatedTags);
+}
+
   if (isLoading) {
     return <div>Loading...</div>;
   }
@@ -305,11 +313,18 @@ console.log("here" + JSON.stringify(btr))
      <h1>sectors: {sectors}</h1>
      <div className='flex gap-2 border-white border-y-[1px] py-2 px-2'>
      <Fliter data={list} setRegions={setRegions} regions={regions} />
-     <Companies data={list} setCountry={setCompanies} country={companies} />
+     
+     <Companies data={list} setSelectedTags={setSelectedTags} selectedTags={selectedTags} setCountry={setCompanies} country={companies} />
      <Country data={list} setCountry={setCountry} country={country} />
      <Terms data={list} setCountry={setTerms} country={terms} />
      <Sectors data={list} setCountry={setSectors} country={sectors} />
      </div>
+
+     <div className='flex flex-row gap-2'>
+      {selectedTags.map((tag, index) => (
+        <div className='cursor-pointer' key={index}>{tag} <button onClick={() => removeTag(tag)}>x</button></div>
+      ))}
+    </div>
 
     <div className='grid grid-cols-3 gap-6 mt-4'>
     <Card title="Companies Present Based On Filters" number={card["Companies Present"]} duration={3000} />
