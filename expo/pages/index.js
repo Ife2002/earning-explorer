@@ -268,7 +268,7 @@ console.log("here" + JSON.stringify(btr))
      <ApexChart options={options} series={options.series} type={options.chart.type} /> 
      </div>
     </div>,
-    <div className='bg-red-300 h-[100%] w-[100%]'>
+    <div className='flex flex-row justify-between h-[100%] w-[100%]'>
       <div className='bg-white mt-4'>
      <ApexChart options={options} series={options.series} type={options.chart.type} /> 
      </div>
