@@ -3,8 +3,8 @@ import axios from 'axios';
 import { Beth_Ellen } from 'next/font/google';
 
 
-function Fliter({ regions, setRegions, data }) {
-    const [selectedTags, setSelectedTags] = useState([]);
+function Fliter({ regions, setRegions, data, selectedTags, setSelectedTags }) {
+    
     const [list, setList] = useState(['list'])
     
   
@@ -25,18 +25,17 @@ function Fliter({ regions, setRegions, data }) {
        // setCountry(tag)
       };
 
-      function removeTag(tag) {
-        const updatedTags = selectedTags.filter((selectedTag) => selectedTag !== tag);
-        setRegions((prevRegions) => prevRegions.filter((region) => region !== tag));
-        setSelectedTags(updatedTags);
-      }  
+ 
     
     const handleClick = () => {
       const value = 'Example Value'; // The value to be pushed
       onValueChange(value);
     };
 
-    
+    if (typeof selectedTags === 'undefined') {
+      // Handle the case where selectedTags is undefined
+      return null; // or render a fallback UI
+    }  
 
   return (
     <div className='flex flex-wrap'>
@@ -51,11 +50,7 @@ function Fliter({ regions, setRegions, data }) {
       ))}
       {/* Add more options as needed */}
     </select>
-    <div>
-      {selectedTags.map((tag, index) => (
-        <div className='cursor-pointer' key={index}>{tag} <button onClick={() => removeTag(tag)}>x</button></div>
-      ))}
-    </div>
+    
     
   </div>
   )

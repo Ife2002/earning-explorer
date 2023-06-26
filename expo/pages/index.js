@@ -3,6 +3,8 @@ import { Inter } from 'next/font/google'
 import React,{ useState, useRef, useEffect } from 'react';
 import { Bars } from  'react-loader-spinner'
 import Fliter from './components/Fliter';
+import Query from './components/Query';
+import { BsChatLeftTextFill } from 'react-icons/bs';
 import Country from './components/filters/Countries';
 import Sectors from './components/filters/Sectors';
 import Terms from './components/filters/Terms';
@@ -27,17 +29,27 @@ export default function Home() {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [filter, setFilter] = useState("Regions");
   const [quarter, setQuarter] = useState(null)
-  const [country, setCountry] = useState('All')
-  const [regions, setRegions] = useState('All')
-  const [companies, setCompanies] = useState('All')
+  const [country, setCountry] = useState(['All'])
+  const [regions, setRegions] = useState(['All'])
+  const [companies, setCompanies] = useState(['All'])
   const [selectedTags, setSelectedTags] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [sectors, setSectors] = useState('All')
-  const [terms, setTerms] = useState('All')
+  const [sectors, setSectors] = useState(['All'])
+  const [terms, setTerms] = useState(['All'])
   const [list, setList] = useState(null)
   const [tfr, setTfr] = useState(null)
   const [tfo, setTfo] = useState(null)
   const [btr, setBtr] = useState(null)
+  const [one, setOne] = useState(null)
+  const [two, setTwo] = useState(null)
+  const [three, setThree] = useState(null)
+  const [four, setFour] = useState(null)
+  const [five, setFive] = useState(null)
+  const [six, setSix] = useState(null)
+  const [seven, setSeven] = useState(null)
+  const [eight, setEight] = useState(null)
+  const [nine, setNine] = useState(null)
+  const [ten, setTen] = useState(null)
   const [card, setCard] = useState(null);
   const [cardtwo, setCardtwo] = useState(null)
   const [cardthree, setCardthree] = useState(null)
@@ -82,6 +94,17 @@ export default function Home() {
           const url6 = 'https://data-value-tool.up.railway.app/total-financials';
           const url7 = 'https://data-value-tool.up.railway.app/average-financials';
           const url8 = 'https://data-value-tool.up.railway.app/bottom-5-terms-by-revenue';
+          const url9 = 'https://data-value-tool.up.railway.app/top-5-terms-by-cost-of-revenue';
+          const url10 = 'https://data-value-tool.up.railway.app/bottom-5-terms-by-cost-of-revenue';
+          const url11 = 'https://data-value-tool.up.railway.app/top-5-terms-by-operating-income';
+          const url12 = 'https://data-value-tool.up.railway.app/bottom-5-terms-by-operating-income';
+          const url13 = 'https://data-value-tool.up.railway.app/top-5-terms-and-corresponding-financials';
+          const url14 = 'https://data-value-tool.up.railway.app/bottom-5-terms-and-corresponding-financials';
+          const url15 = 'https://data-value-tool.up.railway.app/percentage-change-in-stock-price-and-market-cap';
+          const url16 = 'https://data-value-tool.up.railway.app/average-revenue-variation-over-quarters-and-years';
+          const url17 = 'https://data-value-tool.up.railway.app/average-operating-income-variation-over-quarters-and-years';
+          const url18 = 'https://data-value-tool.up.railway.app/average-gross-profit-variation-over-quarters-and-years';
+
       
           try {
             const response1 = await axios.post(url, payload);
@@ -92,6 +115,16 @@ export default function Home() {
             const response6 = await axios.post(url6, payload);
             const response7 = await axios.post(url7, payload);
             const response8 = await axios.post(url8, payload);
+            const response9 = await axios.post(url9, payload);
+            const response10 = await axios.post(url10, payload);
+            const response11 = await axios.post(url11, payload);
+            const response12 = await axios.post(url12, payload);
+            const response13 = await axios.post(url13, payload);
+            const response14 = await axios.post(url14, payload);
+            const response15 = await axios.post(url15, payload);
+            const response16 = await axios.post(url6, payload);
+            const response17 = await axios.post(url17, payload);
+            const response18 = await axios.post(url18, payload);
 
             setList(JSON.parse(response1.data))
             setCard(JSON.parse(response2.data))
@@ -101,6 +134,16 @@ export default function Home() {
             setCardtwo(JSON.parse(response6.data))
             setCardthree(JSON.parse(response7.data))
             setBtr(JSON.parse(response8.data))
+            setOne(JSON.parse(response9.data))
+            setTwo(JSON.parse(response10.data))
+            setThree(JSON.parse(response11.data))
+            setFour(JSON.parse(response12.data))
+            setFive(JSON.parse(response13.data))
+            setSix(JSON.parse(response14.data))
+            setSeven(JSON.parse(response15.data))
+            setEight(JSON.parse(response16.data))
+            setNine(JSON.parse(response17.data))
+            setTen(JSON.parse(response18.data))
             setIsLoading(false)
            // console.log(card);
           //console.log(list)
@@ -112,7 +155,7 @@ export default function Home() {
         fetchData();
       }, [payload]);
 
-console.log("here" + JSON.stringify(btr))
+console.log("here" + JSON.stringify(one))
 //console.log(cardtwo["Total Revenue"])
 // function formatNumber(value) {
 //   const trillion = 1000000000000;
@@ -188,122 +231,65 @@ console.log("here" + JSON.stringify(btr))
 
   const radial_data = []
 
-
+  console.log(tfo?.data, quarter)
   const radialOptionsTopFRev = {
     chart: {
-      type: 'radialBar' //qjson.type
+      type: quarter?.type
     },
-    series: tfo?.data,
+    series: [
+      {
+        name: 'My Dataset',
+        data: tfo?.data
+      }
+    ],
+    xaxis: {
+      categories: tfo?.labels
+    },
     plotOptions: {
-      radialBar: {
-        offsetY: 0,
-        startAngle: 0,
-        endAngle: 270,
-        hollow: {
-          margin: 5,
-          size: '30%',
-          background: 'transparent',
-          image: undefined,
-        },
+      bar: {
+        horizontal: true,
         dataLabels: {
-          name: {
-            show: false,
-          },
-          value: {
-            show: false,
-          }
-        }
+          position: 'top',
+        },
       }
     },
-    colors: ['#1ab7ea', '#0084ff', '#39539E', '#0077B5'],
-    legend: {
-      show: true,
-      floating: true,
-      fontSize: '16px',
-      position: 'left',
-      offsetX: 160,
-      offsetY: 15,
-      labels: {
-        useSeriesColors: true,
-      },
-      markers: {
-        size: 0
-      },
-      formatter: function(seriesName, opts) {
-        return seriesName + ":  " + opts.w.globals.series[opts.seriesIndex]
-      },
-      itemMargin: {
-        vertical: 3
+    dataLabels: {
+      formatter: (val) => {
+        return val / 100000000 + 'B'
       }
     },
-    responsive: [{
-      breakpoint: 480,
-      options: {
-        legend: {
-            show: false
-        }
-      }
-    }],
-    labels: tfo?.labels,
   };
+    
+    //labels: tfo?.labels,
+  
 
 
   const radialOptionsBottomFRev = {
     chart: {
-      type: 'radialBar' //qjson.type
+      type: quarter?.type
     },
-    series: tfo?.data,
+    series: [
+      {
+        name: 'My Dataset',
+        data: tfo?.data
+      }
+    ],
+    xaxis: {
+      categories: tfo?.labels
+    },
     plotOptions: {
-      radialBar: {
-        offsetY: 0,
-        startAngle: 0,
-        endAngle: 270,
-        hollow: {
-          margin: 5,
-          size: '30%',
-          background: 'transparent',
-          image: undefined,
-        },
+      bar: {
+        horizontal: true,
         dataLabels: {
-          name: {
-            show: false,
-          },
-          value: {
-            show: false,
-          }
-        }
+          position: 'top',
+        },
       }
     },
-    colors: ['#1ab7ea', '#0084ff', '#39539E', '#0077B5'],
-    legend: {
-      show: true,
-      floating: true,
-      fontSize: '16px',
-      position: 'left',
-      offsetX: 160,
-      offsetY: 15,
-      labels: {
-        useSeriesColors: true,
-      },
-      markers: {
-        size: 0
-      },
-      formatter: function(seriesName, opts) {
-        return seriesName + ":  " + opts.w.globals.series[opts.seriesIndex]
-      },
-      itemMargin: {
-        vertical: 3
+    dataLabels: {
+      formatter: (val) => {
+        return val / 100000000 + 'B'
       }
     },
-    responsive: [{
-      breakpoint: 480,
-      options: {
-        legend: {
-            show: false
-        }
-      }
-    }],
-    labels: tfo?.labels,
   };
 
 
@@ -571,12 +557,17 @@ console.log("here" + JSON.stringify(btr))
 
   const Tabs = [
     <div className='flex flex-wrap justify-between h-[100%] w-[100%]'>
-    <div className='bg-white rounded-lg p-3 mt-4'>
-     <ApexChart options={radialOptionsTopFRev} series={radialOptionsTopFRev.series} type={radialOptionsTopFRev.chart.type} /> 
+      <div className='w-[100%] flex justify-center'>
+      <div className='bg-white w-[80%] rounded-lg p-3 mt-4'>
+     <ApexChart options={radialOptionsTopFRev} series={radialOptionsTopFRev.series} type='bar' /> 
      </div>
+      </div>
     
-     <div className='bg-white rounded-lg p-3 mt-4'>
-     <ApexChart options={radialOptionsBottomFRev} series={radialOptionsBottomFRev.series} type={radialOptionsBottomFRev.chart.type} /> 
+    
+      <div className='w-[100%] flex justify-center'>
+     <div className='bg-white w-[80%] rounded-lg p-3 mt-4'>
+     <ApexChart options={radialOptionsBottomFRev} series={radialOptionsBottomFRev.series} type='bar' /> 
+     </div>
      </div>
 
      <div className='bg-white rounded-lg p-3 mt-4'>
@@ -586,9 +577,11 @@ console.log("here" + JSON.stringify(btr))
      <div className='bg-white rounded-lg p-3 mt-4'>
      <ApexChart options={radialOptionsBottomFCostRev} series={radialOptionsBottomFCostRev.series} type={radialOptionsBottomFCostRev.chart.type} /> 
      </div>
-
-     <div className='bg-white rounded-lg p-3 mt-4'>
+    
+     <div className='bg-white w-[100%] rounded-lg p-3 mt-4'>
+     <div className='bg-white w-[80%] rounded-lg p-3 mt-4'>
      <ApexChart options={radialOptionsTopFOprInc} series={radialOptionsTopFOprInc.series} type={radialOptionsTopFOprInc.chart.type} /> 
+     </div>
      </div>
 
      <div className='bg-white rounded-lg p-3 mt-4'>
@@ -626,7 +619,15 @@ console.log("here" + JSON.stringify(btr))
     </div>
 ]
 
-
+function removeTag(tag) {
+  const updatedTags = selectedTags.filter((selectedTag) => selectedTag !== tag);
+  setRegions((prevRegions) => prevRegions.filter((region) => region !== tag));
+  setCompanies((prevCompanies) => prevCompanies.filter((company) => company !== tag));
+  setSectors((prevSectors) => prevSectors.filter((sector) => sector !== tag));
+  setTerms((prevTerms) => prevTerms.filter((term) => term !== tag));
+  setCountry((prevCountries) => prevCountries.filter((countrys) => countrys !== tag));
+  setSelectedTags(updatedTags);
+}
 
   if (isLoading) {
     return <div className='w-[100%] h-[100vh] bg-white flex justify-center items-center'>
@@ -649,20 +650,32 @@ console.log("here" + JSON.stringify(btr))
         <title>Earning Explore || Data product LLC</title>
      </Head> 
      {/* <Fliter /> */}
-     <div className='bg-white text-white sticky top-0 left-0 h-[100vh] px-2 w-[20%]'>
+     <div className='bg-white flex py-8 flex-col justify-between text-white sticky top-0 left-0 h-[100vh] px-2 w-[20%]'>
       <div className='border-black border-b-2 py-5 mx-3 flex justify-center'>
       <h1 className='font-bold text-[#1b254b] text-2xl'>Earning Explorer</h1>
-      </div>
       
+      </div>
+      <>
      <button onClick={() => setCurrentIndex(0)} className='w-[100%] py-2 rounded-sm mt-2 cursor-pointer bg-[#051131]'>Terms Visualization</button>
      <button onClick={() => setCurrentIndex(1)} className='w-[100%] py-2 rounded-sm mt-2 cursor-pointer bg-[#051131]'>Financial Visualization</button>
      <button onClick={() => setCurrentIndex(2)} className='w-[100%] py-2 rounded-sm mt-2 cursor-pointer bg-[#051131]'>T and F Visualization</button>
+     </>
+
+     <div className='bg-blue-700 cursor-pointer flex justify-center items-center rounded-full h-[5rem] w-[5rem]'>
+     <BsChatLeftTextFill size={38} />
+     </div>
      </div>
      
-     <div className='w-[80%] h-[100%] px-5 text-white py-5 flex flex-col items-center'>
+     <div className='w-[80%] h-[100%] px-5 text-black py-5 flex flex-col items-center'>
      <h1 className='text-2xl text-[#1b254b] font-bold py-6'>Earning Explorer</h1>
-     <div className='flex gap-2 border-white border-y-[1px] py-2 px-2'>
-     <Fliter data={list} setRegions={setRegions} regions={regions} />
+     <h1>Regions: {regions}</h1>
+     <h1>Country: {country}</h1>
+      <h1>Terms: {terms}</h1>
+      <h1>Sectors: {sectors}</h1>
+      <h1>Companies: {companies}</h1>
+      <Query />
+     <div className='flex gap-2 border-white bg-[#051131] border-y-[1px] py-2 px-2'>
+     <Fliter data={list} setSelectedTags={setSelectedTags} selectedTags={selectedTags} setRegions={setRegions} regions={regions} />
      
      <Companies data={list} setSelectedTags={setSelectedTags} selectedTags={selectedTags} setCountry={setCompanies} country={companies} />
      <Country data={list} setSelectedTags={setSelectedTags} selectedTags={selectedTags} setCountry={setCountry} country={country} />
@@ -670,7 +683,7 @@ console.log("here" + JSON.stringify(btr))
      <Sectors data={list} setSelectedTags={setSelectedTags} selectedTags={selectedTags} setCountry={setSectors} country={sectors} />
      </div>
 
-     <div className='flex flex-row mt-2 w-[100%] gap-2'>
+     <div className='flex flex-wrap mt-2 w-[100%] gap-2'>
       {selectedTags.map((tag, index) => (
         <div className='cursor-pointer border-[#051131] text-[#051131] px-4 rounded-full border-[2px]' key={index}>{tag} <button onClick={() => removeTag(tag)}>x</button></div>
       ))}
