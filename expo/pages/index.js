@@ -737,7 +737,7 @@ function removeTag(tag) {
      </div>
 
      <div className=' h-[100%]  px-10 w-[100%] gap-2'>
-     <h1 className='text-3xl py-3 text-[#1b254b] font-bold'>Visualization</h1>
+     <h1 className='text-xl py-3 text-[#1b254b] font-bold'>Visualization</h1>
      {Tabs[currentIndex]}
      </div>
      

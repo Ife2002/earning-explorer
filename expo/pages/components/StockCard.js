@@ -1,6 +1,11 @@
 import React from 'react';
 
 const StockCard = ({ data }) => {
+
+  if (!data) {
+    return null; // or render a fallback component/error message
+  }
+  
   const { 
     "Percentage Change In Stock Price Three Days Before": beforeChange,
     "Percentage Change In Stock Price Three Days After": afterChange,
