@@ -668,12 +668,14 @@ function removeTag(tag) {
      
      <div className='w-[80%] h-[100%] px-5 text-black py-5 flex flex-col items-center'>
      <h1 className='text-2xl text-[#1b254b] font-bold py-6'>Earning Explorer</h1>
-     <h1>Regions: {regions}</h1>
+     {/* <h1>Regions: {regions}</h1>
      <h1>Country: {country}</h1>
       <h1>Terms: {terms}</h1>
       <h1>Sectors: {sectors}</h1>
-      <h1>Companies: {companies}</h1>
+      <h1>Companies: {companies}</h1> */}
+      
       <Query />
+  
      <div className='flex gap-2 border-white bg-[#051131] border-y-[1px] py-2 px-2'>
      <Fliter data={list} setSelectedTags={setSelectedTags} selectedTags={selectedTags} setRegions={setRegions} regions={regions} />
      

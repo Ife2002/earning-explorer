@@ -32,15 +32,20 @@ function Query() {
   return (
     <div>
       <form onSubmit={handleSubmit}>
+      <div className='bg-white flex justify-between pl-6 pr-2 py-2 rounded-full'>
         <input
           type="text"
           value={query}
           onChange={handleQueryChange}
           placeholder="Enter your query"
+          className='w-[70%]'
         />
-        <button type="submit">Send Query</button>
+        <button className='bg-blue-700 text-white rounded-full px-3 py-2' type="submit">Send Query</button>
+     </div>
       </form>
+      <div className='bg-white mt-2 p-2 rounded-lg'>
       {response && <h1>{response.Response}</h1>}
+      </div>
     </div>
   );
 }
