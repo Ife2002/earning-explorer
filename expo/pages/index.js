@@ -700,11 +700,6 @@ function removeTag(tag) {
       <h1>Terms: {terms}</h1>
       <h1>Sectors: {sectors}</h1>
       <h1>Companies: {companies}</h1> */}
-      <div>
-      <Query /> 
-      </div>
-      
-      
       
   
      <div className='flex gap-2 border-white bg-[#051131] border-y-[1px] py-2 px-2'>
@@ -735,6 +730,10 @@ function removeTag(tag) {
     <Card title="Average Operating Income Across Companies" number={cardthree["Average Operating Income"]} duration={3000} />
     <Card title="Average Gross Profit Across Companies" number={cardthree["Average Gross Profit"]} duration={3000} /> 
      </div>
+
+     <div className='py-6 w-[80%]'>
+      <Query /> 
+      </div>
 
      <div className=' h-[100%]  px-10 w-[100%] gap-2'>
      <h1 className='text-xl py-3 text-[#1b254b] font-bold'>Visualization</h1>
