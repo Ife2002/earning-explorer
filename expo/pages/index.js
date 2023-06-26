@@ -5,6 +5,7 @@ import { Bars } from  'react-loader-spinner'
 import Fliter from './components/Fliter';
 import Query from './components/Query';
 import { BsChatLeftTextFill } from 'react-icons/bs';
+import StockCard from './components/StockCard';
 import Country from './components/filters/Countries';
 import Sectors from './components/filters/Sectors';
 import Terms from './components/filters/Terms';
@@ -171,7 +172,7 @@ export default function Home() {
         fetchData();
       }, [payload]);
 
-console.log("here" + JSON.stringify(eleven))
+console.log("here" + JSON.stringify(seven))
 //console.log(cardtwo["Total Revenue"])
 // function formatNumber(value) {
 //   const trillion = 1000000000000;
@@ -557,53 +558,61 @@ console.log("here" + JSON.stringify(eleven))
 
   const Tabs = [
     <div className='flex flex-wrap justify-between h-[100%] w-[100%]'>
-      <div className='w-[50%] flex justify-center'>
-      <div className='bg-white w-[80%] rounded-lg p-3 mt-4'>
-     <ApexChart options={TopRevBarChart} series={TopRevBarChart.series} type='bar' /> 
-     </div>
-      </div>
 
-      
-      <div className='w-[100%] flex justify-center'>
-     <div className='bg-white w-[80%] rounded-lg p-3 mt-4'>
+     <StockCard data={seven} />
+     <div className='w-[100%] flex justify-center'>
+     <div className='bg-white w-[70%] rounded-lg p-3 mt-4'>
      <ApexChart options={IndvQuarterBarChart} series={IndvQuarterBarChart.series} type='bar' /> 
      </div>
      </div>
+
+
+      <div className='w-[100%] flex justify-center'>
+      <div className='bg-white w-[70%] rounded-lg p-3 mt-4'>
+     <ApexChart options={TopRevBarChart} series={TopRevBarChart.series} type='bar' /> 
+     </div>
+      </div>
     
     
       <div className='w-[100%] flex justify-center'>
-     <div className='bg-white w-[80%] rounded-lg p-3 mt-4'>
+     <div className='bg-white w-[70%] rounded-lg p-3 mt-4'>
      <ApexChart options={BottomRevBarChart} series={BottomRevBarChart.series} type='bar' /> 
      </div>
      </div>
 
-     <div className='bg-white rounded-lg p-3 mt-4'>
+     <div className='w-[100%] flex justify-center'>
+     <div className='bg-white w-[70%] rounded-lg p-3 mt-4'>
      <ApexChart options={TopCostRevBarChart} series={TopCostRevBarChart.series} type='bar' /> 
      </div>
+     </div>
 
-     <div className='bg-white rounded-lg p-3 mt-4'>
+     <div className='w-[100%] flex justify-center'>
+     <div className='bg-white w-[70%] rounded-lg p-3 mt-4'>
      <ApexChart options={BottomCostRevBarChart} series={BottomCostRevBarChart.series} type='bar' /> 
      </div>
-    
-     <div className='bg-white w-[100%] rounded-lg p-3 mt-4'>
-     <div className='bg-white w-[80%] rounded-lg p-3 mt-4'>
+     </div>
+
+     <div className='w-[100%] flex justify-center'>
+     <div className='bg-white w-[70%] rounded-lg p-3 mt-4'>
      <ApexChart options={TopbyOptIncome} series={TopbyOptIncome.series} type='bar' /> 
      </div>
      </div>
 
-     <div className='bg-white rounded-lg p-3 mt-4'>
+     <div className='w-[100%] flex justify-center'>
+     <div className='bg-white w-[70%] rounded-lg p-3 mt-4'>
      <ApexChart options={BottombyOptIncome} series={BottombyOptIncome.series} type='bar' /> 
      </div>
-     
+     </div>
 
      <div className='w-[100%] flex justify-center'>
-     <div className='bg-white w-[80%] rounded-lg p-3 mt-4'>
+     <div className='bg-white w-[70%] rounded-lg p-3 mt-4'>
      <ApexChart options={heatmapOptions} series={heatmapOptions.series} type={heatmapOptions.chart.type} />
      </div>
      </div>
      
     </div>,
-
+   
+   //Financials
     <div className='flex flex-wrap justify-between h-[100%] w-[100%]'>
       <div className='bg-white w-[100%] mt-4'>
      <ApexChart options={treemapOptions} series={treemapOptions.series} type='treemap' /> 
@@ -631,9 +640,11 @@ console.log("here" + JSON.stringify(eleven))
     </div>,
 
     <div className='flex flex-row justify-between h-[100%] w-[100%]'>
-      <div className='bg-white mt-4'>
+      
+
+      {/* <div className='bg-white mt-4'>
      <ApexChart options={options} series={options.series} type={options.chart.type} /> 
-     </div>
+     </div> */}
     </div>
 ]
 
@@ -674,7 +685,7 @@ function removeTag(tag) {
       
       </div>
       <>
-     <button onClick={() => setCurrentIndex(0)} className='w-[100%] py-2 rounded-sm mt-2 cursor-pointer bg-[#051131]'>Terms Visualization</button>
+     <button onClick={() => setCurrentIndex(0)} className='w-[100%] py-2 rounded-sm mt-2 cursor-pointer bg-[#051131]'>Main dashboard</button>
      <button onClick={() => setCurrentIndex(1)} className='w-[100%] py-2 rounded-sm mt-2 cursor-pointer bg-[#051131]'>Financial Visualization</button>
      <button onClick={() => setCurrentIndex(2)} className='w-[100%] py-2 rounded-sm mt-2 cursor-pointer bg-[#051131]'>T and F Visualization</button>
      </>
