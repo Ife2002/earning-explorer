@@ -560,12 +560,6 @@ console.log("here" + JSON.stringify(seven))
     <div className='flex flex-wrap justify-between h-[100%] w-[100%]'>
 
      <StockCard data={seven} />
-     <div className='w-[100%] flex justify-center'>
-     <div className='bg-white w-[70%] rounded-lg p-3 mt-4'>
-     <ApexChart options={IndvQuarterBarChart} series={IndvQuarterBarChart.series} type='bar' /> 
-     </div>
-     </div>
-
 
       <div className='w-[100%] flex justify-center'>
       <div className='bg-white w-[70%] rounded-lg p-3 mt-4'>
@@ -603,12 +597,6 @@ console.log("here" + JSON.stringify(seven))
      <ApexChart options={BottombyOptIncome} series={BottombyOptIncome.series} type='bar' /> 
      </div>
      </div>
-
-     <div className='w-[100%] flex justify-center'>
-     <div className='bg-white w-[70%] rounded-lg p-3 mt-4'>
-     <ApexChart options={heatmapOptions} series={heatmapOptions.series} type={heatmapOptions.chart.type} />
-     </div>
-     </div>
      
     </div>,
    
@@ -634,13 +622,23 @@ console.log("here" + JSON.stringify(seven))
      <ApexChart options={radialTwoOptions} series={radialTwoOptions.series} type={radialTwoOptions.chart.type} /> 
      </div> */}
 
-     <div className='bg-black mt-4'>
+     {/* <div className='bg-black mt-4'>
      <ApexChart options={options} series={options.series} type={options.chart.type} /> 
-     </div>
+     </div> */}
     </div>,
 
-    <div className='flex flex-row justify-between h-[100%] w-[100%]'>
-      
+    <div className='flex flex-wrap justify-between h-[100%] w-[100%]'>
+      <div className='w-[100%] flex justify-center'>
+     <div className='bg-white w-[70%] rounded-lg p-3 mt-4'>
+     <ApexChart options={IndvQuarterBarChart} series={IndvQuarterBarChart.series} type='bar' /> 
+     </div>
+     </div>
+
+     <div className='w-[100%] flex justify-center'>
+     <div className='bg-white w-[70%] rounded-lg p-3 mt-4'>
+     <ApexChart options={heatmapOptions} series={heatmapOptions.series} type={heatmapOptions.chart.type} />
+     </div>
+     </div>
 
       {/* <div className='bg-white mt-4'>
      <ApexChart options={options} series={options.series} type={options.chart.type} /> 
@@ -687,10 +685,10 @@ function removeTag(tag) {
       <>
      <button onClick={() => setCurrentIndex(0)} className='w-[100%] py-2 rounded-sm mt-2 cursor-pointer bg-[#051131]'>Main dashboard</button>
      <button onClick={() => setCurrentIndex(1)} className='w-[100%] py-2 rounded-sm mt-2 cursor-pointer bg-[#051131]'>Financial Visualization</button>
-     <button onClick={() => setCurrentIndex(2)} className='w-[100%] py-2 rounded-sm mt-2 cursor-pointer bg-[#051131]'>T and F Visualization</button>
+     <button onClick={() => setCurrentIndex(2)} className='w-[100%] py-2 rounded-sm mt-2 cursor-pointer bg-[#051131]'>Terms Visualization</button>
      </>
 
-     <div onClick={() => setOpen(true)} className='bg-blue-700 cursor-pointer flex justify-center items-center rounded-full h-[5rem] w-[5rem]'>
+     <div className='bg-blue-700 cursor-pointer flex justify-center items-center rounded-full h-[5rem] w-[5rem]'>
      <BsChatLeftTextFill size={38} />
      </div>
      </div>
@@ -702,8 +700,10 @@ function removeTag(tag) {
       <h1>Terms: {terms}</h1>
       <h1>Sectors: {sectors}</h1>
       <h1>Companies: {companies}</h1> */}
+      <div>
+      <Query /> 
+      </div>
       
-       <Query /> 
       
       
   

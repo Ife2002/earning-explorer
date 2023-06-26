@@ -30,9 +30,9 @@ function Query() {
   };
 
   return (
-    <div className='max-w-2xl my-2'>
+    <div className='w-[100%] my-2'>
       <form onSubmit={handleSubmit}>
-      <div className='bg-white flex justify-between pl-6 pr-2 py-2 rounded-full'>
+      <div className='bg-white w-[100%] flex justify-between pl-6 pr-2 py-2 rounded-full'>
         <input
           type="text"
           value={query}
@@ -43,9 +43,9 @@ function Query() {
         <button className='bg-blue-700 text-white rounded-full px-3 py-2' type="submit">Send Query</button>
      </div>
       </form>
-      <div className='bg-white mt-2 p-2 rounded-lg transform transition-transform duration-500 ease-out animate-slide-down'>
+      {response? <div className='bg-white mt-2 p-2 rounded-lg transform transition-transform duration-500 ease-out animate-slide-down'>
       {response && <h1>{response.Response}</h1>}
-      </div>
+      </div> : null}
     </div>
   );
 }
