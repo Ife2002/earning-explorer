@@ -51,6 +51,7 @@ export default function Home() {
   const [nine, setNine] = useState(null)
   const [ten, setTen] = useState(null)
   const [card, setCard] = useState(null);
+  const [open, setOpen] = useState(false)
   const [cardtwo, setCardtwo] = useState(null)
   const [cardthree, setCardthree] = useState(null)
   const [drop, setDrop] = useState([
@@ -122,7 +123,7 @@ export default function Home() {
             const response13 = await axios.post(url13, payload);
             const response14 = await axios.post(url14, payload);
             const response15 = await axios.post(url15, payload);
-            const response16 = await axios.post(url6, payload);
+            const response16 = await axios.post(url16, payload);
             const response17 = await axios.post(url17, payload);
             const response18 = await axios.post(url18, payload);
 
@@ -193,6 +194,219 @@ console.log("here" + JSON.stringify(one))
   }
 
 
+  //Barcharts Main page
+
+  const IndvQuarterBarChart = {
+    chart: {
+      type: quarter?.type
+    },
+    series: [
+      {
+        name: 'My Dataset',
+        data: quarter?.data
+      }
+    ],
+    xaxis: {
+      categories: quarter?.labels
+    },
+    plotOptions: {
+      bar: {
+        horizontal: true,
+        dataLabels: {
+          position: 'top',
+        },
+      }
+    },
+    title: {
+      text: 'Individual quarterly terms count'
+    },
+  };
+
+  const TopRevBarChart = {
+    chart: {
+      type: quarter?.type
+    },
+    series: [
+      {
+        name: 'My Dataset',
+        data: tfo?.data
+      }
+    ],
+    xaxis: {
+      categories: tfo?.labels
+    },
+    plotOptions: {
+      bar: {
+        horizontal: true,
+        dataLabels: {
+          position: 'top',
+        },
+      }
+    },
+    dataLabels: {
+      formatter: (val) => {
+        return val / 100000000 + 'B'
+      }
+    },
+    title: {
+      text: 'Top Five terms by Revenue'
+    },
+  };
+  
+  const BottomRevBarChart = {
+    chart: {
+      type: quarter?.type
+    },
+    series: [
+      {
+        name: 'My Dataset',
+        data: btr?.data
+      }
+    ],
+    xaxis: {
+      categories: btr?.labels
+    },
+    plotOptions: {
+      bar: {
+        horizontal: true,
+        dataLabels: {
+          position: 'top',
+        },
+      }
+    },
+    dataLabels: {
+      formatter: (val) => {
+        return val / 100000000 + 'B'
+      }
+    },
+    title: {
+      text: 'Bottom Five terms by Revenue'
+    },
+  };
+
+  const TopCostRevBarChart = {
+    chart: {
+      type: quarter?.type
+    },
+    series: [
+      {
+        name: 'My Dataset',
+        data: one?.data
+      }
+    ],
+    xaxis: {
+      categories: one?.labels
+    },
+    plotOptions: {
+      bar: {
+        horizontal: true,
+        dataLabels: {
+          position: 'top',
+        },
+      }
+    },
+    dataLabels: {
+      formatter: (val) => {
+        return val / 100000000 + 'B'
+      }
+    },
+    title: {
+      text: 'Top Five terms by cost of revenue'
+    },
+  };
+
+  const BottomCostRevBarChart = {
+    chart: {
+      type: quarter?.type
+    },
+    series: [
+      {
+        name: 'My Dataset',
+        data: two?.data
+      }
+    ],
+    xaxis: {
+      categories: two?.labels
+    },
+    plotOptions: {
+      bar: {
+        horizontal: true,
+        dataLabels: {
+          position: 'top',
+        },
+      }
+    },
+    dataLabels: {
+      formatter: (val) => {
+        return val / 100000000 + 'B'
+      }
+    },
+    title: {
+      text: 'Bottom Five terms by cost of revenue'
+    },
+  };
+
+  const TopbyOptIncome = {
+    chart: {
+      type: quarter?.type
+    },
+    series: [
+      {
+        name: 'My Dataset',
+        data: three?.data
+      }
+    ],
+    xaxis: {
+      categories: three?.labels
+    },
+    plotOptions: {
+      bar: {
+        horizontal: true,
+        dataLabels: {
+          position: 'top',
+        },
+      }
+    },
+    dataLabels: {
+      formatter: (val) => {
+        return val / 100000000 + 'B'
+      }
+    },
+    title: {
+      text: 'Top Five terms by operating income'
+    },
+  };
+
+  const BottombyOptIncome = {
+    chart: {
+      type: quarter?.type
+    },
+    series: [
+      {
+        name: 'My Dataset',
+        data: four?.data
+      }
+    ],
+    xaxis: {
+      categories: four?.labels
+    },
+    plotOptions: {
+      bar: {
+        horizontal: true,
+        dataLabels: {
+          position: 'top',
+        },
+      }
+    },
+    dataLabels: {
+      formatter: (val) => {
+        return val / 100000000 + 'B'
+      }
+    },
+    title: {
+      text: 'Bottom Five terms by operating income'
+    },
+  };
 
   const options = {
     chart: {
@@ -226,305 +440,40 @@ console.log("here" + JSON.stringify(one))
       type: tfr?.type
     },
     series: series_data,
-    colors: ["#1652f0"]
+    colors: ["#1652f0"],
+    title: {
+      text: 'Terms frequency over years quarters'
+    },
+  };
+
+  console.log( "treemap"+ JSON.stringify(nine?.data[0].data))
+  
+  const treemapOptions = {
+    series: [{
+      data: nine?.data[0].data
+    }],
+    options: {
+      legend: {
+        show: true
+      },
+      chart: {
+        height: 350,
+        type: 'treemap'
+      },
+      title: {
+        text: 'Basic Treemap'
+      }
+    },
+  
   };
 
   const radial_data = []
 
   console.log(tfo?.data, quarter)
-  const radialOptionsTopFRev = {
-    chart: {
-      type: quarter?.type
-    },
-    series: [
-      {
-        name: 'My Dataset',
-        data: tfo?.data
-      }
-    ],
-    xaxis: {
-      categories: tfo?.labels
-    },
-    plotOptions: {
-      bar: {
-        horizontal: true,
-        dataLabels: {
-          position: 'top',
-        },
-      }
-    },
-    dataLabels: {
-      formatter: (val) => {
-        return val / 100000000 + 'B'
-      }
-    },
-  };
+  
     
     //labels: tfo?.labels,
-  
 
-
-  const radialOptionsBottomFRev = {
-    chart: {
-      type: quarter?.type
-    },
-    series: [
-      {
-        name: 'My Dataset',
-        data: tfo?.data
-      }
-    ],
-    xaxis: {
-      categories: tfo?.labels
-    },
-    plotOptions: {
-      bar: {
-        horizontal: true,
-        dataLabels: {
-          position: 'top',
-        },
-      }
-    },
-    dataLabels: {
-      formatter: (val) => {
-        return val / 100000000 + 'B'
-      }
-    },
-  };
-
-
-  const radialOptionsTopFCostRev = {
-    chart: {
-      type: 'radialBar' //qjson.type
-    },
-    series: tfo?.data,
-    plotOptions: {
-      radialBar: {
-        offsetY: 0,
-        startAngle: 0,
-        endAngle: 270,
-        hollow: {
-          margin: 5,
-          size: '30%',
-          background: 'transparent',
-          image: undefined,
-        },
-        dataLabels: {
-          name: {
-            show: false,
-          },
-          value: {
-            show: false,
-          }
-        }
-      }
-    },
-    colors: ['#1ab7ea', '#0084ff', '#39539E', '#0077B5'],
-    legend: {
-      show: true,
-      floating: true,
-      fontSize: '16px',
-      position: 'left',
-      offsetX: 160,
-      offsetY: 15,
-      labels: {
-        useSeriesColors: true,
-      },
-      markers: {
-        size: 0
-      },
-      formatter: function(seriesName, opts) {
-        return seriesName + ":  " + opts.w.globals.series[opts.seriesIndex]
-      },
-      itemMargin: {
-        vertical: 3
-      }
-    },
-    responsive: [{
-      breakpoint: 480,
-      options: {
-        legend: {
-            show: false
-        }
-      }
-    }],
-    labels: tfo?.labels,
-  };
-
-  const radialOptionsBottomFCostRev = {
-    chart: {
-      type: 'radialBar' //qjson.type
-    },
-    series: tfo?.data,
-    plotOptions: {
-      radialBar: {
-        offsetY: 0,
-        startAngle: 0,
-        endAngle: 270,
-        hollow: {
-          margin: 5,
-          size: '30%',
-          background: 'transparent',
-          image: undefined,
-        },
-        dataLabels: {
-          name: {
-            show: false,
-          },
-          value: {
-            show: false,
-          }
-        }
-      }
-    },
-    colors: ['#1ab7ea', '#0084ff', '#39539E', '#0077B5'],
-    legend: {
-      show: true,
-      floating: true,
-      fontSize: '16px',
-      position: 'left',
-      offsetX: 160,
-      offsetY: 15,
-      labels: {
-        useSeriesColors: true,
-      },
-      markers: {
-        size: 0
-      },
-      formatter: function(seriesName, opts) {
-        return seriesName + ":  " + opts.w.globals.series[opts.seriesIndex]
-      },
-      itemMargin: {
-        vertical: 3
-      }
-    },
-    responsive: [{
-      breakpoint: 480,
-      options: {
-        legend: {
-            show: false
-        }
-      }
-    }],
-    labels: tfo?.labels,
-  };
-
-
-  const radialOptionsTopFOprInc = {
-    chart: {
-      type: 'radialBar' //qjson.type
-    },
-    series: tfo?.data,
-    plotOptions: {
-      radialBar: {
-        offsetY: 0,
-        startAngle: 0,
-        endAngle: 270,
-        hollow: {
-          margin: 5,
-          size: '30%',
-          background: 'transparent',
-          image: undefined,
-        },
-        dataLabels: {
-          name: {
-            show: false,
-          },
-          value: {
-            show: false,
-          }
-        }
-      }
-    },
-    colors: ['#1ab7ea', '#0084ff', '#39539E', '#0077B5'],
-    legend: {
-      show: true,
-      floating: true,
-      fontSize: '16px',
-      position: 'left',
-      offsetX: 160,
-      offsetY: 15,
-      labels: {
-        useSeriesColors: true,
-      },
-      markers: {
-        size: 0
-      },
-      formatter: function(seriesName, opts) {
-        return seriesName + ":  " + opts.w.globals.series[opts.seriesIndex]
-      },
-      itemMargin: {
-        vertical: 3
-      }
-    },
-    responsive: [{
-      breakpoint: 480,
-      options: {
-        legend: {
-            show: false
-        }
-      }
-    }],
-    labels: tfo?.labels,
-  };
-
-  const radialOptionsBottomFOprInc = {
-    chart: {
-      type: 'radialBar' //qjson.type
-    },
-    series: tfo?.data,
-    plotOptions: {
-      radialBar: {
-        offsetY: 0,
-        startAngle: 0,
-        endAngle: 270,
-        hollow: {
-          margin: 5,
-          size: '30%',
-          background: 'transparent',
-          image: undefined,
-        },
-        dataLabels: {
-          name: {
-            show: false,
-          },
-          value: {
-            show: false,
-          }
-        }
-      }
-    },
-    colors: ['#1ab7ea', '#0084ff', '#39539E', '#0077B5'],
-    legend: {
-      show: true,
-      floating: true,
-      fontSize: '16px',
-      position: 'left',
-      offsetX: 160,
-      offsetY: 15,
-      labels: {
-        useSeriesColors: true,
-      },
-      markers: {
-        size: 0
-      },
-      formatter: function(seriesName, opts) {
-        return seriesName + ":  " + opts.w.globals.series[opts.seriesIndex]
-      },
-      itemMargin: {
-        vertical: 3
-      }
-    },
-    responsive: [{
-      breakpoint: 480,
-      options: {
-        legend: {
-            show: false
-        }
-      }
-    }],
-    labels: tfo?.labels,
-  };
 
   //duplicate this and rename to radialThreeOptions
   const radialTwoOptions = {
@@ -557,55 +506,65 @@ console.log("here" + JSON.stringify(one))
 
   const Tabs = [
     <div className='flex flex-wrap justify-between h-[100%] w-[100%]'>
-      <div className='w-[100%] flex justify-center'>
+      <div className='w-[50%] flex justify-center'>
       <div className='bg-white w-[80%] rounded-lg p-3 mt-4'>
-     <ApexChart options={radialOptionsTopFRev} series={radialOptionsTopFRev.series} type='bar' /> 
+     <ApexChart options={TopRevBarChart} series={TopRevBarChart.series} type='bar' /> 
      </div>
       </div>
+
+      
+      <div className='w-[100%] flex justify-center'>
+     <div className='bg-white w-[80%] rounded-lg p-3 mt-4'>
+     <ApexChart options={IndvQuarterBarChart} series={IndvQuarterBarChart.series} type='bar' /> 
+     </div>
+     </div>
     
     
       <div className='w-[100%] flex justify-center'>
      <div className='bg-white w-[80%] rounded-lg p-3 mt-4'>
-     <ApexChart options={radialOptionsBottomFRev} series={radialOptionsBottomFRev.series} type='bar' /> 
+     <ApexChart options={BottomRevBarChart} series={BottomRevBarChart.series} type='bar' /> 
      </div>
      </div>
 
      <div className='bg-white rounded-lg p-3 mt-4'>
-     <ApexChart options={radialOptionsTopFCostRev} series={radialOptionsTopFCostRev.series} type={radialOptionsTopFCostRev.chart.type} /> 
+     <ApexChart options={TopCostRevBarChart} series={TopCostRevBarChart.series} type='bar' /> 
      </div>
 
      <div className='bg-white rounded-lg p-3 mt-4'>
-     <ApexChart options={radialOptionsBottomFCostRev} series={radialOptionsBottomFCostRev.series} type={radialOptionsBottomFCostRev.chart.type} /> 
+     <ApexChart options={BottomCostRevBarChart} series={BottomCostRevBarChart.series} type='bar' /> 
      </div>
     
      <div className='bg-white w-[100%] rounded-lg p-3 mt-4'>
      <div className='bg-white w-[80%] rounded-lg p-3 mt-4'>
-     <ApexChart options={radialOptionsTopFOprInc} series={radialOptionsTopFOprInc.series} type={radialOptionsTopFOprInc.chart.type} /> 
+     <ApexChart options={TopbyOptIncome} series={TopbyOptIncome.series} type='bar' /> 
      </div>
      </div>
 
      <div className='bg-white rounded-lg p-3 mt-4'>
-     <ApexChart options={radialOptionsBottomFOprInc} series={radialOptionsBottomFOprInc.series} type={radialOptionsBottomFOprInc.chart.type} /> 
+     <ApexChart options={BottombyOptIncome} series={BottombyOptIncome.series} type='bar' /> 
      </div>
+     
 
-     <div className='bg-white rounded-lg p-3 mt-4'>
-     <ApexChart options={heatmapOptions} series={heatmapOptions.series} type={heatmapOptions.chart.type} /> 
+     <div className='w-[100%] flex justify-center'>
+     <div className='bg-white w-[80%] rounded-lg p-3 mt-4'>
+     <ApexChart options={heatmapOptions} series={heatmapOptions.series} type={heatmapOptions.chart.type} />
+     </div>
      </div>
      
     </div>,
 
     <div className='flex flex-row justify-between h-[100%] w-[100%]'>
-      <div className='bg-white mt-4'>
-     <ApexChart options={heatmapOptions} series={heatmapOptions.series} type={heatmapOptions.chart.type} /> 
+      <div className='bg-white w-[100%] mt-4'>
+     <ApexChart options={treemapOptions} series={treemapOptions.series} type='treemap' /> 
      </div>
      
-     <div className='bg-blue-400 mt-4'>
+     {/* <div className='bg-blue-400 mt-4'>
      <ApexChart options={radialTwoOptions} series={radialTwoOptions.series} type={radialTwoOptions.chart.type} /> 
      </div>
 
      <div className='bg-blue-400 mt-4'>
      <ApexChart options={radialTwoOptions} series={radialTwoOptions.series} type={radialTwoOptions.chart.type} /> 
-     </div>
+     </div> */}
 
      <div className='bg-black mt-4'>
      <ApexChart options={options} series={options.series} type={options.chart.type} /> 
@@ -661,7 +620,7 @@ function removeTag(tag) {
      <button onClick={() => setCurrentIndex(2)} className='w-[100%] py-2 rounded-sm mt-2 cursor-pointer bg-[#051131]'>T and F Visualization</button>
      </>
 
-     <div className='bg-blue-700 cursor-pointer flex justify-center items-center rounded-full h-[5rem] w-[5rem]'>
+     <div onClick={() => setOpen(true)} className='bg-blue-700 cursor-pointer flex justify-center items-center rounded-full h-[5rem] w-[5rem]'>
      <BsChatLeftTextFill size={38} />
      </div>
      </div>
@@ -674,7 +633,9 @@ function removeTag(tag) {
       <h1>Sectors: {sectors}</h1>
       <h1>Companies: {companies}</h1> */}
       
-      <Query />
+       <Query /> 
+      
+      
   
      <div className='flex gap-2 border-white bg-[#051131] border-y-[1px] py-2 px-2'>
      <Fliter data={list} setSelectedTags={setSelectedTags} selectedTags={selectedTags} setRegions={setRegions} regions={regions} />
