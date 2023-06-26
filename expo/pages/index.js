@@ -446,9 +446,47 @@ console.log("here" + JSON.stringify(one))
     },
   };
 
-  console.log( "treemap"+ JSON.stringify(nine?.data[0].data))
-  
+  console.log( "treemap"+ JSON.stringify(eight?.data[0].data))
+
   const treemapOptions = {
+    series: [{
+      data: eight?.data[0].data
+    }],
+    options: {
+      legend: {
+        show: true
+      },
+      chart: {
+        height: 350,
+        type: 'treemap'
+      },
+      title: {
+        text: 'Basic Treemap'
+      }
+    },
+  
+  };
+
+  const AvrgOpIncOptions = {
+    series: [{
+      data: nine?.data[0].data
+    }],
+    options: {
+      legend: {
+        show: true
+      },
+      chart: {
+        height: 350,
+        type: 'treemap'
+      },
+      title: {
+        text: 'Basic Treemap'
+      }
+    },
+  
+  };
+
+  const AvrgGrssPrftOptions = {
     series: [{
       data: nine?.data[0].data
     }],
@@ -555,6 +593,14 @@ console.log("here" + JSON.stringify(one))
 
     <div className='flex flex-row justify-between h-[100%] w-[100%]'>
       <div className='bg-white w-[100%] mt-4'>
+     <ApexChart options={treemapOptions} series={treemapOptions.series} type='treemap' /> 
+     </div>
+
+     <div className='bg-white w-[100%] mt-4'>
+     <ApexChart options={AvrgOpIncOptions} series={AvrgOpIncOptions.series} type='treemap' /> 
+     </div>
+
+     <div className='bg-white w-[100%] mt-4'>
      <ApexChart options={treemapOptions} series={treemapOptions.series} type='treemap' /> 
      </div>
      
