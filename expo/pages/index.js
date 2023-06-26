@@ -50,6 +50,7 @@ export default function Home() {
   const [eight, setEight] = useState(null)
   const [nine, setNine] = useState(null)
   const [ten, setTen] = useState(null)
+  const [eleven, setEleven] = useState(null)
   const [card, setCard] = useState(null);
   const [open, setOpen] = useState(false)
   const [cardtwo, setCardtwo] = useState(null)
@@ -82,6 +83,17 @@ export default function Home() {
     "sectors": sectors,
     "terms": terms
   }
+
+  const payloadTwo = {
+    "from_year": 2012,
+    "to_year": 2019,
+    "regions": regions,
+    "countries": country,
+    "companies": companies,
+    "sectors": sectors,
+    "terms": terms,
+    "term": "Cloud"
+  }
   
   
 
@@ -105,6 +117,7 @@ export default function Home() {
           const url16 = 'https://data-value-tool.up.railway.app/average-revenue-variation-over-quarters-and-years';
           const url17 = 'https://data-value-tool.up.railway.app/average-operating-income-variation-over-quarters-and-years';
           const url18 = 'https://data-value-tool.up.railway.app/average-gross-profit-variation-over-quarters-and-years';
+          const url19 = 'https://data-value-tool.up.railway.app/average-financials-for-individual-terms';
 
       
           try {
@@ -126,6 +139,7 @@ export default function Home() {
             const response16 = await axios.post(url16, payload);
             const response17 = await axios.post(url17, payload);
             const response18 = await axios.post(url18, payload);
+            const response19 = await axios.post(url19, payloadTwo);
 
             setList(JSON.parse(response1.data))
             setCard(JSON.parse(response2.data))
@@ -145,6 +159,7 @@ export default function Home() {
             setEight(JSON.parse(response16.data))
             setNine(JSON.parse(response17.data))
             setTen(JSON.parse(response18.data))
+            setEleven(JSON.parse(response19.data))
             setIsLoading(false)
            // console.log(card);
           //console.log(list)
@@ -156,7 +171,7 @@ export default function Home() {
         fetchData();
       }, [payload]);
 
-console.log("here" + JSON.stringify(one))
+console.log("here" + JSON.stringify(eleven))
 //console.log(cardtwo["Total Revenue"])
 // function formatNumber(value) {
 //   const trillion = 1000000000000;
@@ -488,7 +503,7 @@ console.log("here" + JSON.stringify(one))
 
   const AvrgGrssPrftOptions = {
     series: [{
-      data: nine?.data[0].data
+      data: ten?.data[0].data
     }],
     options: {
       legend: {
@@ -506,8 +521,6 @@ console.log("here" + JSON.stringify(one))
   };
 
   const radial_data = []
-
-  console.log(tfo?.data, quarter)
   
     
     //labels: tfo?.labels,
@@ -591,7 +604,7 @@ console.log("here" + JSON.stringify(one))
      
     </div>,
 
-    <div className='flex flex-row justify-between h-[100%] w-[100%]'>
+    <div className='flex flex-wrap justify-between h-[100%] w-[100%]'>
       <div className='bg-white w-[100%] mt-4'>
      <ApexChart options={treemapOptions} series={treemapOptions.series} type='treemap' /> 
      </div>
@@ -601,7 +614,7 @@ console.log("here" + JSON.stringify(one))
      </div>
 
      <div className='bg-white w-[100%] mt-4'>
-     <ApexChart options={treemapOptions} series={treemapOptions.series} type='treemap' /> 
+     <ApexChart options={AvrgGrssPrftOptions} series={AvrgGrssPrftOptions.series} type='treemap' /> 
      </div>
      
      {/* <div className='bg-blue-400 mt-4'>
