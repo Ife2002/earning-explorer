@@ -5,12 +5,18 @@ import { Bars } from  'react-loader-spinner'
 import Fliter from './components/Fliter';
 import Query from './components/Query';
 import { BsChatLeftTextFill } from 'react-icons/bs';
+import { BiFlag, BiSolidCircleThreeQuarter } from 'react-icons/bi'
+import { MdOutlineAttachMoney } from 'react-icons/md'
+
+
+
 import StockCard from './components/StockCard';
 import Country from './components/filters/Countries';
 import Sectors from './components/filters/Sectors';
 import Terms from './components/filters/Terms';
 import Companies from './components/filters/Companies';
 import NumberAnimation from './components/NumberAnimation';
+import { MdOutlineAccountBalance } from 'react-icons/md'
 
 import Head from 'next/head';
 import Card from './components/Card';
@@ -656,6 +662,12 @@ function removeTag(tag) {
   setSelectedTags(updatedTags);
 }
 
+const My_Component = <MdOutlineAccountBalance color='white' />
+const My_Component2 = <BiFlag color='white' />
+const My_Component3 = <BiSolidCircleThreeQuarter color='white' />
+const My_Component4 = <MdOutlineAttachMoney color='white' />
+//BiSolidCircleThreeQuarter
+
   if (isLoading) {
     return <div className='w-[100%] h-[100vh] bg-white flex justify-center items-center'>
       <Head>
@@ -680,7 +692,7 @@ function removeTag(tag) {
         <title>Earning Explore || Data product LLC</title>
      </Head> 
      {/* <Fliter /> */}
-     <div className='bg-white flex py-8 flex-col justify-between text-white sticky top-0 left-0 h-[100vh] px-2 w-[20%]'>
+     <div className='bg-white flex py-8 flex-col text-white sticky top-0 left-0 h-[100vh] px-2 w-[20%]'>
       <div className='border-black border-b-2 py-5 mx-3 flex justify-center'>
       <h1 className='font-bold text-[#1b254b] text-2xl'>Earning Explorer</h1>
       
@@ -691,9 +703,9 @@ function removeTag(tag) {
      <button onClick={() => setCurrentIndex(2)} className='w-[100%] py-2 rounded-sm mt-2 cursor-pointer bg-[#051131]'>Terms Visualization</button>
      </>
 
-     <div className='bg-blue-700 cursor-pointer flex justify-center items-center rounded-full h-[5rem] w-[5rem]'>
+     {/* <div className='bg-blue-700 cursor-pointer flex justify-center items-center rounded-full h-[5rem] w-[5rem]'>
      <BsChatLeftTextFill size={38} />
-     </div>
+     </div> */}
      </div>
      
      <div className='w-[80%] h-[100%] px-5 text-black py-5 flex flex-col items-center'>
@@ -712,9 +724,23 @@ function removeTag(tag) {
       <h1>Terms: {terms}</h1>
       <h1>Sectors: {sectors}</h1>
       <h1>Companies: {companies}</h1> */}
+
+    <div className='grid grid-cols-3 gap-6 mt-4'>
+    <Card title="Companies Present Based On Filters" color="bg-blue-800" icon={My_Component} number={card["Companies Present"]} duration={3000} />
+    <Card title="Countries Present Based On Filters" color="bg-purple-600" icon={My_Component2} number={card["Countries Present"]} duration={3000} />
+    <Card title="Sectors Present Based On Filters" color="bg-orange-500" icon={My_Component3} number={card["Sectors Present"]} duration={3000} />
+
+    <Card title="Total Revenue Across Companies" color="bg-purple-600" icon={My_Component4} number={cardtwo["Total Revenue"]} duration={3000} />
+    <Card title="Total Operating Income Across Companies" color="bg-red-400" icon={My_Component4} number={cardtwo["Total Operating Income"]} duration={3000} />
+    <Card title="Total Gross Profit Across Companies" color="bg-green-400" icon={My_Component4} number={cardtwo["Total Gross Profit"]} duration={3000} /> 
+
+    <Card title="Average Revenue Across Companies" color="bg-orange-500"  icon={My_Component4} number={cardthree["Average Revenue"]} duration={3000} />
+    <Card title="Average Operating Income Across Companies" color="bg-purple-600"  icon={My_Component4} number={cardthree["Average Operating Income"]} duration={3000} />
+    <Card title="Average Gross Profit Across Companies" color="bg-blue-800" icon={My_Component4} number={cardthree["Average Gross Profit"]} duration={3000} /> 
+    </div>
       
   
-     <div className='flex gap-2 border-white bg-[#051131] border-y-[1px] py-2 px-2'>
+     <div className='flex gap-2 border-white rounded-full bg-[#051131] mt-4 py-2 px-2'>
      <Fliter data={list} setSelectedTags={setSelectedTags} selectedTags={selectedTags} setRegions={setRegions} regions={regions} />
      
      <Companies data={list} setSelectedTags={setSelectedTags} selectedTags={selectedTags} setCountry={setCompanies} country={companies} />
@@ -728,20 +754,6 @@ function removeTag(tag) {
         <div className='cursor-pointer border-[#051131] text-[#051131] px-4 rounded-full border-[2px]' key={index}>{tag} <button onClick={() => removeTag(tag)}>x</button></div>
       ))}
     </div>
-
-    <div className='grid grid-cols-3 gap-6 mt-4'>
-    <Card title="Companies Present Based On Filters" number={card["Companies Present"]} duration={3000} />
-    <Card title="Countries Present Based On Filters" number={card["Countries Present"]} duration={3000} />
-    <Card title="Sectors Present Based On Filters" number={card["Sectors Present"]} duration={3000} />
-
-    <Card title="Total Revenue Across Companies" number={cardtwo["Total Revenue"]} duration={3000} />
-    <Card title="Total Operating Income Across Companies" number={cardtwo["Total Operating Income"]} duration={3000} />
-    <Card title="Total Gross Profit Across Companies" number={cardtwo["Total Gross Profit"]} duration={3000} /> 
-
-    <Card title="Average Revenue Across Companies" number={cardthree["Average Revenue"]} duration={3000} />
-    <Card title="Average Operating Income Across Companies" number={cardthree["Average Operating Income"]} duration={3000} />
-    <Card title="Average Gross Profit Across Companies" number={cardthree["Average Gross Profit"]} duration={3000} /> 
-     </div>
 
      
 

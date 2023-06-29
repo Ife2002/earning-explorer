@@ -1,7 +1,7 @@
 import React from 'react'
 import NumberAnimation from './NumberAnimation'
 
-const Card = ({ number, duration, title }) => {
+const Card = ({ number, duration, title, icon, color }) => {
     return(
       <div className='w-[100%] flex items-stretch justify-center'>
         
@@ -9,8 +9,11 @@ const Card = ({ number, duration, title }) => {
       <div className='bg-white h-10 py-2 px-4'>
       <h1 className='text-sm text-grey-800 font-medium'>{title}</h1>
       </div>
-      <div className='flex py-3 text-[#051131] justify-left px-4'>      
-        <NumberAnimation number={number} duration={duration} />    
+      <div className='flex py-3 text-[#051131] justify-between px-4'>      
+        <NumberAnimation number={number} duration={duration} />   
+        <div className={`h-[35px] w-[35px] flex justify-center items-center rounded-full ${color}`}>
+          {icon}
+        </div> 
       </div>
       </div>
     </div>
