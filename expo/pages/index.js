@@ -693,14 +693,24 @@ const My_Component4 = <MdOutlineAttachMoney color='white' />
      </Head> 
      {/* <Fliter /> */}
      <div className='bg-white flex py-8 flex-col text-white sticky top-0 left-0 h-[100vh] px-2 w-[20%]'>
-      <div className='border-black border-b-2 py-5 mx-3 flex justify-center'>
-      <h1 className='font-bold text-[#1b254b] text-2xl'>Earning Explorer</h1>
+      <div className='border-[#1b254b] border-b-2 py-5 mx-3 flex'>
+      <h1 className='font-bold text-[#1b254b] text-xl'>Earning Explorer</h1>
       
       </div>
       <>
-     <button onClick={() => setCurrentIndex(0)} className='w-[100%] py-2 rounded-sm mt-2 cursor-pointer bg-[#051131]'>Main dashboard</button>
-     <button onClick={() => setCurrentIndex(1)} className='w-[100%] py-2 rounded-sm mt-2 cursor-pointer bg-[#051131]'>Financial Visualization</button>
-     <button onClick={() => setCurrentIndex(2)} className='w-[100%] py-2 rounded-sm mt-2 cursor-pointer bg-[#051131]'>Terms Visualization</button>
+      <div className='w-[100%] mt-2 flex'>
+      <button onClick={() => setCurrentIndex(0)} className='w-[98%] py-2 rounded-sm flex justify-start px-3  cursor-pointer text-[#051131]'><h1>Main dashboard</h1></button>
+      <div className={`w-[2%] rounded-sm ${ currentIndex === 0? 'bg-[#051131]' : 'bg-white'} `}></div>
+      </div>
+      <div className='w-[100%] mt-2 flex'>
+      <button onClick={() => setCurrentIndex(1)} className='w-[98%] py-2 rounded-sm flex justify-start px-3  cursor-pointer text-[#051131]'><h1>Financial Visualization</h1></button>
+      <div className={`w-[2%] rounded-sm ${ currentIndex === 1? 'bg-[#051131]' : 'bg-white'} `}></div>
+      </div>
+      <div className='w-[100%] mt-2 flex'>
+      <button onClick={() => setCurrentIndex(2)} className='w-[98%] py-2 rounded-sm flex justify-start px-3  cursor-pointer text-[#051131]'><h1>Terms Visualization</h1></button>
+      <div className={`w-[2%] rounded-sm ${ currentIndex === 2? 'bg-[#051131]' : 'bg-white'} `}></div>
+      </div>
+   
      </>
 
      {/* <div className='bg-blue-700 cursor-pointer flex justify-center items-center rounded-full h-[5rem] w-[5rem]'>
