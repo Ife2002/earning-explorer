@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { MdCancel } from 'react-icons/md'
 
 
 function Query() {
@@ -43,8 +44,9 @@ function Query() {
         <button className='bg-blue-700 text-white rounded-full px-3 py-2' type="submit">Send Query</button>
      </div>
       </form>
-      {response? <div className='bg-white mt-2 p-2 rounded-lg transform transition-transform duration-500 ease-out animate-slide-down'>
+      {response? <div className='bg-white border-[1px] border-black mt-2 p-2  rounded-lg transform transition-transform duration-500 ease-out animate-slide-down'>
       {response && <h1>{response.Response}</h1>}
+      <div className='flex justify-end px-1 w-[100%]'> <MdCancel onClick={() => setResponse('')} className='cursor-pointer' size={20} /> </div>
       </div> : null}
     </div>
   );

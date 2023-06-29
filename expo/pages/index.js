@@ -658,6 +658,9 @@ function removeTag(tag) {
 
   if (isLoading) {
     return <div className='w-[100%] h-[100vh] bg-white flex justify-center items-center'>
+      <Head>
+        <title>Loading</title>
+     </Head> 
       <Bars
   height="80"
   width="80"
@@ -694,7 +697,16 @@ function removeTag(tag) {
      </div>
      
      <div className='w-[80%] h-[100%] px-5 text-black py-5 flex flex-col items-center'>
-     <h1 className='text-2xl text-[#1b254b] font-bold py-6'>Earning Explorer</h1>
+      <div className='w-[100%] flex flex-row justify-between items-center'>
+      <div className='w-[30%] flex flex-col py-3'>
+      <h1 className='text-[0.8rem]'>Pages / Main Dashboard</h1>
+      <h1 className='text-3xl text-[#1b254b] font-bold'>Earning Explorer</h1>
+      </div>
+      <div className='w-[50%]'>
+        <Query />
+      </div>
+      </div>
+     
      {/* <h1>Regions: {regions}</h1>
      <h1>Country: {country}</h1>
       <h1>Terms: {terms}</h1>
@@ -731,9 +743,7 @@ function removeTag(tag) {
     <Card title="Average Gross Profit Across Companies" number={cardthree["Average Gross Profit"]} duration={3000} /> 
      </div>
 
-     <div className='py-6 w-[80%]'>
-      <Query /> 
-      </div>
+     
 
      <div className=' h-[100%]  px-10 w-[100%] gap-2'>
      <h1 className='text-xl py-3 text-[#1b254b] font-bold'>Visualization</h1>
