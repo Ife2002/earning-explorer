@@ -273,6 +273,7 @@ console.log("here" + JSON.stringify(seven))
     title: {
       text: 'Top Five terms by Revenue'
     },
+    color: ["1652f0", "FFFF00"]
   };
   
   const BottomRevBarChart = {
@@ -666,6 +667,10 @@ const My_Component = <MdOutlineAccountBalance color='white' />
 const My_Component2 = <BiFlag color='white' />
 const My_Component3 = <BiSolidCircleThreeQuarter color='white' />
 const My_Component4 = <MdOutlineAttachMoney color='white' />
+
+const Header = [
+
+]
 //BiSolidCircleThreeQuarter
 
   if (isLoading) {
@@ -721,7 +726,7 @@ const My_Component4 = <MdOutlineAttachMoney color='white' />
      <div className='w-[80%] h-[100%] px-5 text-black py-5 flex flex-col items-center'>
       <div className='w-[100%] flex flex-row justify-between items-center'>
       <div className='w-[30%] flex flex-col py-3'>
-      <h1 className='text-[0.8rem]'>Pages / Main Dashboard</h1>
+      <h1 className='text-[0.8rem]'>Pages / { currentIndex === 1 && "Financial Visualization" } { currentIndex === 0 && "Main Dashboard" } { currentIndex === 2 && "Terms Visualization" }</h1>
       <h1 className='text-3xl text-[#1b254b] font-bold'>Earning Explorer</h1>
       </div>
       <div className='w-[50%]'>
