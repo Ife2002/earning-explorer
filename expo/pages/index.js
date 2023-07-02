@@ -9,7 +9,6 @@ import { BiFlag, BiSolidCircleThreeQuarter } from 'react-icons/bi'
 import { MdOutlineAttachMoney } from 'react-icons/md'
 
 
-
 import StockCard from './components/StockCard';
 import Country from './components/filters/Countries';
 import Sectors from './components/filters/Sectors';
@@ -255,11 +254,14 @@ console.log("here" + JSON.stringify(seven))
       }
     ],
     xaxis: {
+      labels: {
+        show: false,
+      },
       categories: tfo?.labels
     },
     plotOptions: {
       bar: {
-        horizontal: true,
+        columnWidth: '50%',
         dataLabels: {
           position: 'top',
         },
@@ -268,12 +270,20 @@ console.log("here" + JSON.stringify(seven))
     dataLabels: {
       formatter: (val) => {
         return val / 100000000 + 'B'
-      }
+      },
+      enabled: false,
     },
     title: {
       text: 'Top Five terms by Revenue'
     },
-    color: ["1652f0", "FFFF00"]
+    theme: {
+      monochrome: {
+        enabled: true,
+        color: '#1652f0',
+        shadeTo: 'dark',
+        shadeIntensity: 0.65
+      }
+    }
   };
   
   const BottomRevBarChart = {
@@ -287,11 +297,15 @@ console.log("here" + JSON.stringify(seven))
       }
     ],
     xaxis: {
+      labels: {
+        show: false,
+      },
       categories: btr?.labels
     },
     plotOptions: {
       bar: {
-        horizontal: true,
+        columnWidth: '50%',
+        horizontal: false,
         dataLabels: {
           position: 'top',
         },
@@ -300,7 +314,8 @@ console.log("here" + JSON.stringify(seven))
     dataLabels: {
       formatter: (val) => {
         return val / 100000000 + 'B'
-      }
+      },
+      enabled: false,
     },
     title: {
       text: 'Bottom Five terms by Revenue'
@@ -564,16 +579,16 @@ console.log("here" + JSON.stringify(seven))
   };
 
   const Tabs = [
-    <div className='flex flex-wrap justify-between h-[100%] w-[100%]'>
-
-     <StockCard data={seven} />
+    <div className='grid grid-cols-2 justify-between h-[100%] w-[100%]'>
 
       <div className='w-[100%] flex justify-center'>
       <div className='bg-white w-[70%] rounded-lg p-3 mt-4'>
      <ApexChart options={TopRevBarChart} series={TopRevBarChart.series} type='bar' /> 
      </div>
       </div>
+      
     
+      
     
       <div className='w-[100%] flex justify-center'>
      <div className='bg-white w-[70%] rounded-lg p-3 mt-4'>
@@ -609,6 +624,7 @@ console.log("here" + JSON.stringify(seven))
    
    //Financials
     <div className='flex flex-wrap justify-between h-[100%] w-[100%]'>
+      <StockCard data={seven} />
       <div className='bg-white w-[100%] mt-4'>
      <ApexChart options={treemapOptions} series={treemapOptions.series} type='treemap' /> 
      </div>
