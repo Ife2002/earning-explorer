@@ -7,6 +7,7 @@ import Query from './components/Query';
 import { BsChatLeftTextFill } from 'react-icons/bs';
 import { BiFlag, BiSolidCircleThreeQuarter } from 'react-icons/bi'
 import { MdOutlineAttachMoney } from 'react-icons/md'
+import Map from './components/Map';
 
 
 import StockCard from './components/StockCard';
@@ -249,7 +250,7 @@ console.log("here" + JSON.stringify(seven))
     },
     series: [
       {
-        name: 'My Dataset',
+        name: '',
         data: tfo?.data
       }
     ],
@@ -421,7 +422,7 @@ console.log("here" + JSON.stringify(seven))
     },
     series: [
       {
-        name: 'My Dataset',
+        name: '',
         data: four?.data
       }
     ],
@@ -463,85 +464,85 @@ console.log("here" + JSON.stringify(seven))
 
   const series_data = []
 
-  for (let i = 0; i < tfr?.labels.length; i++) {
-    const series_element = {
-      name : tfr?.labels[i],
-      data : tfr?.data[i]
-    }
+  // for (let i = 0; i < tfr?.labels.length; i++) {
+  //   const series_element = {
+  //     name : tfr?.labels[i],
+  //     data : tfr?.data[i]
+  //   }
 
-    series_data.push(series_element)
+  //   series_data.push(series_element)
     
-  };
+  // };
 
-  const heatmapOptions = {
-    chart: {
-      type: tfr?.type
-    },
-    series: series_data,
-    colors: ["#1652f0"],
-    title: {
-      text: 'Terms frequency over years quarters'
-    },
-  };
+  // const heatmapOptions = {
+  //   chart: {
+  //     type: tfr?.type
+  //   },
+  //   series: series_data,
+  //   colors: ["#1652f0"],
+  //   title: {
+  //     text: 'Terms frequency over years quarters'
+  //   },
+  // };
 
-  console.log( "treemap"+ JSON.stringify(eight?.data[0].data))
+ // console.log( "treemap"+ JSON.stringify(eight?.data[0].data))
 
-  const treemapOptions = {
-    series: [{
-      data: eight?.data[0].data
-    }],
-    options: {
-      legend: {
-        show: true
-      },
-      chart: {
-        height: 350,
-        type: 'treemap'
-      },
-      title: {
-        text: 'Basic Treemap'
-      }
-    },
+  // const treemapOptions = {
+  //   series: [{
+  //     data: eight?.data[0].data
+  //   }],
+  //   options: {
+  //     legend: {
+  //       show: true
+  //     },
+  //     chart: {
+  //       height: 350,
+  //       type: 'treemap'
+  //     },
+  //     title: {
+  //       text: 'Basic Treemap'
+  //     }
+  //   },
   
-  };
+  // };
 
-  const AvrgOpIncOptions = {
-    series: [{
-      data: nine?.data[0].data
-    }],
-    options: {
-      legend: {
-        show: true
-      },
-      chart: {
-        height: 350,
-        type: 'treemap'
-      },
-      title: {
-        text: 'Basic Treemap'
-      }
-    },
+  // const AvrgOpIncOptions = {
+  //   series: [{
+  //     data: nine?.data[0].data
+  //   }],
+  //   options: {
+  //     legend: {
+  //       show: true
+  //     },
+  //     chart: {
+  //       height: 350,
+  //       type: 'treemap'
+  //     },
+  //     title: {
+  //       text: 'Basic Treemap'
+  //     }
+  //   },
   
-  };
+  // };
 
-  const AvrgGrssPrftOptions = {
-    series: [{
-      data: ten?.data[0].data
-    }],
-    options: {
-      legend: {
-        show: true
-      },
-      chart: {
-        height: 350,
-        type: 'treemap'
-      },
-      title: {
-        text: 'Basic Treemap'
-      }
-    },
+  // const AvrgGrssPrftOptions = {
+  //   series: [{
+  //     data: ten?.data[0].data
+  //   }],
+  //   options: {
+  //     legend: {
+  //       show: true
+  //     },
+  //     chart: {
+  //       height: 350,
+  //       type: 'treemap'
+  //     },
+  //     title: {
+  //       text: 'Basic Treemap'
+  //     }
+  //   },
   
-  };
+  // };
 
   const radial_data = []
   
@@ -579,63 +580,64 @@ console.log("here" + JSON.stringify(seven))
   };
 
   const Tabs = [
-    <div className='grid grid-cols-2 justify-between h-[100%] w-[100%]'>
+    // <div className='grid grid-cols-2 justify-between h-[100%] w-[100%]'>
 
-      <div className='w-[100%] flex justify-center'>
-      <div className='bg-white w-[70%] rounded-lg p-3 mt-4'>
-     <ApexChart options={TopRevBarChart} series={TopRevBarChart.series} type='bar' /> 
-     </div>
-      </div>
+    //   <div className='w-[100%] flex justify-center'>
+    //   <div className='bg-white w-[70%] rounded-lg p-3 mt-4'>
+    //  <ApexChart options={TopRevBarChart} series={TopRevBarChart.series} type='bar' /> 
+    //  </div>
+    //   </div>
       
     
       
     
-      <div className='w-[100%] flex justify-center'>
-     <div className='bg-white w-[70%] rounded-lg p-3 mt-4'>
-     <ApexChart options={BottomRevBarChart} series={BottomRevBarChart.series} type='bar' /> 
-     </div>
-     </div>
+    //   <div className='w-[100%] flex justify-center'>
+    //  <div className='bg-white w-[70%] rounded-lg p-3 mt-4'>
+    //  <ApexChart options={BottomRevBarChart} series={BottomRevBarChart.series} type='bar' /> 
+    //  </div>
+    //  </div>
 
-     <div className='w-[100%] flex justify-center'>
-     <div className='bg-white w-[70%] rounded-lg p-3 mt-4'>
-     <ApexChart options={TopCostRevBarChart} series={TopCostRevBarChart.series} type='bar' /> 
-     </div>
-     </div>
+    //  <div className='w-[100%] flex justify-center'>
+    //  <div className='bg-white w-[70%] rounded-lg p-3 mt-4'>
+    //  <ApexChart options={TopCostRevBarChart} series={TopCostRevBarChart.series} type='bar' /> 
+    //  </div>
+    //  </div>
 
-     <div className='w-[100%] flex justify-center'>
-     <div className='bg-white w-[70%] rounded-lg p-3 mt-4'>
-     <ApexChart options={BottomCostRevBarChart} series={BottomCostRevBarChart.series} type='bar' /> 
-     </div>
-     </div>
+    //  <div className='w-[100%] flex justify-center'>
+    //  <div className='bg-white w-[70%] rounded-lg p-3 mt-4'>
+    //  <ApexChart options={BottomCostRevBarChart} series={BottomCostRevBarChart.series} type='bar' /> 
+    //  </div>
+    //  </div>
 
-     <div className='w-[100%] flex justify-center'>
-     <div className='bg-white w-[70%] rounded-lg p-3 mt-4'>
-     <ApexChart options={TopbyOptIncome} series={TopbyOptIncome.series} type='bar' /> 
-     </div>
-     </div>
+    //  <div className='w-[100%] flex justify-center'>
+    //  <div className='bg-white w-[70%] rounded-lg p-3 mt-4'>
+    //  <ApexChart options={TopbyOptIncome} series={TopbyOptIncome.series} type='bar' /> 
+    //  </div>
+    //  </div>
 
-     <div className='w-[100%] flex justify-center'>
-     <div className='bg-white w-[70%] rounded-lg p-3 mt-4'>
-     <ApexChart options={BottombyOptIncome} series={BottombyOptIncome.series} type='bar' /> 
-     </div>
-     </div>
+    //  <div className='w-[100%] flex justify-center'>
+    //  <div className='bg-white w-[70%] rounded-lg p-3 mt-4'>
+    //  <ApexChart options={BottombyOptIncome} series={BottombyOptIncome.series} type='bar' /> 
+    //  </div>
+    //  </div>
      
-    </div>,
+   // </div>,
    
    //Financials
     <div className='flex flex-wrap justify-between h-[100%] w-[100%]'>
       <StockCard data={seven} />
-      <div className='bg-white w-[100%] mt-4'>
+      <Map />
+      {/* <div className='bg-white w-[100%] mt-4'>
      <ApexChart options={treemapOptions} series={treemapOptions.series} type='treemap' /> 
-     </div>
+     </div> */}
 
-     <div className='bg-white w-[100%] mt-4'>
+     {/* <div className='bg-white w-[100%] mt-4'>
      <ApexChart options={AvrgOpIncOptions} series={AvrgOpIncOptions.series} type='treemap' /> 
      </div>
 
      <div className='bg-white w-[100%] mt-4'>
      <ApexChart options={AvrgGrssPrftOptions} series={AvrgGrssPrftOptions.series} type='treemap' /> 
-     </div>
+     </div> */}
      
      {/* <div className='bg-blue-400 mt-4'>
      <ApexChart options={radialTwoOptions} series={radialTwoOptions.series} type={radialTwoOptions.chart.type} /> 
@@ -657,11 +659,12 @@ console.log("here" + JSON.stringify(seven))
      </div>
      </div>
 
-     <div className='w-[100%] flex justify-center'>
+    
+     {/* <div className='w-[100%] flex justify-center'>
      <div className='bg-white w-[70%] rounded-lg p-3 mt-4'>
      <ApexChart options={heatmapOptions} series={heatmapOptions.series} type={heatmapOptions.chart.type} />
      </div>
-     </div>
+     </div> */}
 
       {/* <div className='bg-white mt-4'>
      <ApexChart options={options} series={options.series} type={options.chart.type} /> 

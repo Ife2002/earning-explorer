@@ -9,11 +9,10 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@jadesrochers/geomap": "^0.4.0",
+    "@nivo/geo": "^0.83.0",
     "autoprefixer": "10.4.14",
     "axios": "^1.4.0",
     "chart.js": "^4.3.0",
-    "d3-geo": "^3.1.0",
     "next": "13.4.7",
     "postcss": "8.4.24",
     "ramda": "^0.29.0",
